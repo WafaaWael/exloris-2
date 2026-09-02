@@ -1,0 +1,24 @@
+{
+  "name": "Exloris.Editor",
+  "rootNamespace": "Exloris.Editor",
+  "references": [
+    "Exloris.Core",
+    "Exloris.Runtime",
+    "Exloris.Content",
+    "Unity.Localization",
+    "Unity.Localization.Editor",
+    "Unity.TextMeshPro",
+    "Unity.ugui"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

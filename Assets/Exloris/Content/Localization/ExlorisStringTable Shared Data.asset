@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: ExlorisStringTable Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: ExlorisStringTable
+  m_TableCollectionNameGuidString: e7595bbdcc4cf40bfa49144108e68491
+  m_Entries:
+  - m_Id: 225435648
+    m_Key: foundation.loading
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242212864
+    m_Key: foundation.recovery.retry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242212865
+    m_Key: foundation.recovery.home
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242212866
+    m_Key: foundation.accessibility.reduced_motion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242212867
+    m_Key: foundation.accessibility.captions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242212868
+    m_Key: foundation.harness.ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242212869
+    m_Key: foundation.harness.input_test
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242212870
+    m_Key: foundation.harness.audio_test
+    m_Metadata:
+      m_Items: []
+  - m_Id: 93747575513088
+    m_Key: foundation.intro.caption.vo_intro_001
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6920491736010588164
+  references:
+    version: 2
+    RefIds:
+    - rid: 6920491736010588164
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1787836540716

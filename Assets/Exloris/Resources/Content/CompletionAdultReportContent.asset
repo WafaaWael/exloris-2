@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0fccd5f691e8424fba2a380021c0a61, type: 3}
+  m_Name: CompletionAdultReportContent
+  m_EditorClassIdentifier: Exloris.Runtime::Exloris.Runtime.Completion.CompletionAdultReportContent
+  completionBackgrounds:
+  - {fileID: 21300000, guid: f37f21e897bff4854aebf42efd52e603, type: 3}
+  - {fileID: 21300000, guid: caa0416f9eb994140ba1005b166c781a, type: 3}
+  - {fileID: 21300000, guid: df34f83249e174fa4ad8fcd67afac37b, type: 3}
+  parentBackgrounds:
+  - {fileID: 21300000, guid: dec12dc7d1f1d4998bffd7ed57055737, type: 3}
+  - {fileID: 21300000, guid: 7e6132103e72d435e8215b22a731bf6f, type: 3}
+  - {fileID: 21300000, guid: a5039f72e38b545698d85e1a564cfa6c, type: 3}
+  completionAvatars:
+  - {fileID: 21300000, guid: 7c0728c8c4762483c919d55009b011f9, type: 3}
+  - {fileID: 21300000, guid: a73604ca4c3a043fdb61d3b2ff78654f, type: 3}
+  frames:
+  - {fileID: 21300000, guid: 3a58764b24cf7465fb45992f80af7b0c, type: 3}
+  - {fileID: 21300000, guid: 4ee16632a0ebc4a0eb3ec65b6597df62, type: 3}
+  adultHold: {fileID: 21300000, guid: effd8917df0584e9aaec3f732bf6a3b6, type: 3}
+  adultProgress:
+  - {fileID: 21300000, guid: e2120a89919844af18df9c882d91fef3, type: 3}
+  - {fileID: 21300000, guid: 843e9f10a48774d63a415124a378ca07, type: 3}
+  - {fileID: 21300000, guid: c661a14ab775b4e1496cbfb13c4aa1f6, type: 3}
+  - {fileID: 21300000, guid: 242feadf5ec0f460288fc9158de9d054, type: 3}
+  - {fileID: 21300000, guid: b39eb7a6e14694d2d8a7d949cdf4a50f, type: 3}
+  controls:
+  - {fileID: 21300000, guid: d51676b66fca84a1e9fd1a71e5caa406, type: 3}
+  - {fileID: 21300000, guid: 634f3486458f94aa68fe030dbbda618a, type: 3}
+  - {fileID: 21300000, guid: 1ff4759be8a28409499c67addab53354, type: 3}
+  - {fileID: 21300000, guid: c33172900e0dc49b3a5d9c36a042d5ea, type: 3}
+  - {fileID: 21300000, guid: d4ff068962ede4de1b424afd46994eac, type: 3}
+  - {fileID: 21300000, guid: e773167a955ce448ead5e58ad5eb0faa, type: 3}
+  completionMotion: {fileID: 4900000, guid: ae44a4148d57940b6b20edf02ae0ecdb, type: 3}
+  completionVoice: {fileID: 8300000, guid: db27d87b15f004e5b83565eb855eb548, type: 3}
+  completionVisualEquivalent: {fileID: 21300000, guid: 87cdb469927e34be7bbc876ae45c3921, type: 3}
+  completionMusic: {fileID: 8300000, guid: 7d7a518b0359845339f5647322afd77b, type: 3}
+  villageAmbience: {fileID: 8300000, guid: 529a1dd5201d64724a25ee7e1306098c, type: 3}

@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0acd103554ac440ab4b6f865e5d52fb, type: 3}
+  m_Name: AvatarContent
+  m_EditorClassIdentifier: Exloris.Runtime::Exloris.Runtime.Avatar.AvatarContent
+  backgrounds:
+  - {fileID: 21300000, guid: 293e793b234fd4ba8ad5208456205221, type: 3}
+  - {fileID: 21300000, guid: 06071b04c83c042d2876666f0af5a28d, type: 3}
+  - {fileID: 21300000, guid: 93d4215e1a9db46beb4fb10347e38dce, type: 3}
+  boyMotionSprites:
+  - {fileID: 21300000, guid: f927610280ee94d7bb5b3faa86cc4221, type: 3}
+  - {fileID: 21300000, guid: da64c4cd939de467b84e631850eb8ddd, type: 3}
+  - {fileID: 21300000, guid: e0fec24695cfb41fcb1d5c07ae736ddd, type: 3}
+  - {fileID: 21300000, guid: aa2f7ad31efe0427a9fb582c7b4bd4a3, type: 3}
+  - {fileID: 21300000, guid: 59d2ca89d5ee944599264e240ed5292a, type: 3}
+  - {fileID: 21300000, guid: 15a6107fa1cc2498b8ff1d953609149a, type: 3}
+  girlMotionSprites:
+  - {fileID: 21300000, guid: 22919f24ddb664c6c8f707e244754b35, type: 3}
+  - {fileID: 21300000, guid: ff6c8ce8c037449fe8f278cf801a76fe, type: 3}
+  - {fileID: 21300000, guid: fa40985fefa0d434aa87275911262a74, type: 3}
+  - {fileID: 21300000, guid: 589abfd185dd04500a41abe1769bee6b, type: 3}
+  - {fileID: 21300000, guid: d7c8c1b81de3447289701d37c50ae5f2, type: 3}
+  - {fileID: 21300000, guid: 2f310bf8c87a84554a5f8b39284bca6a, type: 3}
+  motionContracts:
+  - {fileID: 4900000, guid: 352e6500dbf69435db98b45057b37553, type: 3}
+  - {fileID: 4900000, guid: 938710affda0441a4964ecfb3488e90c, type: 3}
+  - {fileID: 4900000, guid: 6bf1a6fc1a36e4714aacfd0906c8675c, type: 3}
+  - {fileID: 4900000, guid: a7dac70b077c540d886c768b95478762, type: 3}
+  uiSprites:
+  - {fileID: 21300000, guid: 2c73709110654429e86d629f8b75884c, type: 3}
+  - {fileID: 21300000, guid: ea8ca3730504240d1b416967cd9025c7, type: 3}
+  - {fileID: 21300000, guid: ef6700f02985e46bfb0e46529e2f14c6, type: 3}
+  - {fileID: 21300000, guid: d6575327e83d64b7abdfbc92c0094ac2, type: 3}
+  - {fileID: 21300000, guid: aa67c2c4156824c1a96fa6b6cc90f968, type: 3}
+  - {fileID: 21300000, guid: dbcc2e6304545412597a6a2ac7284f30, type: 3}
+  - {fileID: 21300000, guid: c1f7a233fe1e042cd957df925d5241e4, type: 3}
+  - {fileID: 21300000, guid: bd2f80519b0e644af8cb68b864670121, type: 3}
+  - {fileID: 21300000, guid: d811fc50cd8274d9f906dab24b4da0c4, type: 3}
+  voiceClips:
+  - {fileID: 8300000, guid: 08217b2ab8ce94a60888061556a688cf, type: 3}
+  - {fileID: 8300000, guid: 82853ce6e3863445c9cb65c20099af0e, type: 3}
+  - {fileID: 8300000, guid: 9e22382dfc2aa4d518f2385545237b55, type: 3}
+  visualEquivalents:
+  - {fileID: 21300000, guid: 185d986f99b7e46d1ba3bf866f00cd54, type: 3}
+  - {fileID: 21300000, guid: bfc2c68a0728b40b1a185c4901a35dce, type: 3}
+  - {fileID: 21300000, guid: 66d4714cffab94e0b911399e74b7bceb, type: 3}
+  sfxClips:
+  - {fileID: 8300000, guid: 8d00c0e869bf64f559aeb90e5e7ac9f8, type: 3}
+  - {fileID: 8300000, guid: 83d39f01f93a84406924e0d3f49c02ff, type: 3}
+  - {fileID: 8300000, guid: 4a1d57d7e846e41e289c5d770c6aac5c, type: 3}

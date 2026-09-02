@@ -1,0 +1,40 @@
+[
+{
+    "string_id": "VO-S3-INTRO",
+    "audio_file": "voice/en/vo-s3-intro-en.wav",
+    "duration_ms": 8032,
+    "cues": [
+        {
+            "cue_id": "VO-S3-INTRO-C01",
+            "start_ms": 0,
+            "end_ms": 3772,
+            "text": "Choose one way to help the village."
+        },
+        {
+            "cue_id": "VO-S3-INTRO-C02",
+            "start_ms": 3922,
+            "end_ms": 8032,
+            "text": "Every plan shows something different."
+        }
+    ]
+},
+{
+    "string_id": "VO-S3-OUTCOME",
+    "audio_file": "voice/en/vo-s3-outcome-en.wav",
+    "duration_ms": 6735,
+    "cues": [
+        {
+            "cue_id": "VO-S3-OUTCOME-C01",
+            "start_ms": 0,
+            "end_ms": 2850,
+            "text": "This helped in one way."
+        },
+        {
+            "cue_id": "VO-S3-OUTCOME-C02",
+            "start_ms": 3000,
+            "end_ms": 6735,
+            "text": "The village still needs something too."
+        }
+    ]
+}
+]

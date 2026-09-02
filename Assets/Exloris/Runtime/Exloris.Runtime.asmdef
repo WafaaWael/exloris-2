@@ -1,0 +1,20 @@
+{
+  "name": "Exloris.Runtime",
+  "rootNamespace": "Exloris.Runtime",
+  "references": [
+    "Exloris.Core",
+    "Unity.InputSystem",
+    "Unity.Localization",
+    "Unity.TextMeshPro",
+    "Unity.ugui"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

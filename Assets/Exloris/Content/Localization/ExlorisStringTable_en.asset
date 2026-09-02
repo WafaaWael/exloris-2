@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: ExlorisStringTable_en
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: e7595bbdcc4cf40bfa49144108e68491, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 225435648
+    m_Localized: Loading
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242212864
+    m_Localized: Try again
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242212865
+    m_Localized: Home
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242212866
+    m_Localized: Reduced motion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242212867
+    m_Localized: Captions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242212868
+    m_Localized: Foundation ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242212869
+    m_Localized: Tap the picture
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242212870
+    m_Localized: Listen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 93747575513088
+    m_Localized: Come explore the Nile with me.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

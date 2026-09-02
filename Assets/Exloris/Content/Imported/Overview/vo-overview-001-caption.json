@@ -1,0 +1,25 @@
+{
+  "string_id": "VO-OVERVIEW-001",
+  "audio_file": "vo-overview-001-en.wav",
+  "duration_ms": 9000,
+  "cues": [
+    {
+      "cue_id": "VO-OVERVIEW-001-C01",
+      "start_ms": 0,
+      "end_ms": 3139,
+      "text": "First, measure the river."
+    },
+    {
+      "cue_id": "VO-OVERVIEW-001-C02",
+      "start_ms": 3289,
+      "end_ms": 6032,
+      "text": "Next, read the river."
+    },
+    {
+      "cue_id": "VO-OVERVIEW-001-C03",
+      "start_ms": 6182,
+      "end_ms": 9000,
+      "text": "Then, help the village."
+    }
+  ]
+}

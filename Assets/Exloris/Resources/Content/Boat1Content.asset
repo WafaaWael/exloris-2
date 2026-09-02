@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f20c77a91fdba4343ab5f1deba49e0de, type: 3}
+  m_Name: Boat1Content
+  m_EditorClassIdentifier: Exloris.Runtime::Exloris.Runtime.Boat.Boat1Content
+  backgrounds:
+  - {fileID: 21300000, guid: c1c637392942341a782b1751abebf706, type: 3}
+  - {fileID: 21300000, guid: 87459c5902bb94905984057f4b6210aa, type: 3}
+  - {fileID: 21300000, guid: e472a837594ca4054a69f5f13f5a8846, type: 3}
+  - {fileID: 21300000, guid: c5a2a8d07bd52412b96e018bee3a822f, type: 3}
+  - {fileID: 21300000, guid: 1f57df0379569427e835eff4de698279, type: 3}
+  - {fileID: 21300000, guid: 2acf62176bd7144dca7ca399483cf38c, type: 3}
+  - {fileID: 21300000, guid: dbe9cbb2e9a5143ad8e94d300a1da6d7, type: 3}
+  - {fileID: 21300000, guid: 0cb2cecbe24cd4a0d83dc377ae9fd90e, type: 3}
+  - {fileID: 21300000, guid: 51b58e6166c574d7a8d5256509b7f69a, type: 3}
+  boatSprites:
+  - {fileID: 21300000, guid: 3ca1b19b794194e2e88bb16ed9cd4b00, type: 3}
+  - {fileID: 21300000, guid: 78850ebb181cc48dd8ea610d73e3737b, type: 3}
+  - {fileID: 21300000, guid: 7d3e10818c9a4494986c9bad13e2b744, type: 3}
+  - {fileID: 21300000, guid: 52a736980e40c4b88843649473fdb518, type: 3}
+  - {fileID: 21300000, guid: aa11c84a05fcc458ab003028981b5b58, type: 3}
+  childSprites:
+  - {fileID: 21300000, guid: 4fd01db602a1441cd904dc690d30a8d4, type: 3}
+  - {fileID: 21300000, guid: af1749b4ae2334f2aa2c2054a11d11ed, type: 3}
+  boatkeeperSprites:
+  - {fileID: 21300000, guid: a4dd46951f6d8411d94c70274d9c70a1, type: 3}
+  - {fileID: 21300000, guid: 5353e7923c9024f17bc5019f76acbe07, type: 3}
+  - {fileID: 21300000, guid: bc1a64c1e3f7e41019c372f4d7336161, type: 3}
+  - {fileID: 21300000, guid: 0f26a9859b22e4ad0a40ba8ad68be04f, type: 3}
+  ibisSprites:
+  - {fileID: 21300000, guid: f98be3174dd9f46df9d514b3ad23eaa6, type: 3}
+  - {fileID: 21300000, guid: c9f0c474522b744f9a734a7100ed01a2, type: 3}
+  - {fileID: 21300000, guid: 02621f5bab4c24aeb8b14347774254ec, type: 3}
+  - {fileID: 21300000, guid: 0cc68a5c2dd1b4878b48f749696059fe, type: 3}
+  - {fileID: 21300000, guid: e91892bf2ce2f41cda240a755af8714d, type: 3}
+  - {fileID: 21300000, guid: e88025edbd10a45819d4f9ec9b45adca, type: 3}
+  - {fileID: 21300000, guid: 56ddf640afe594c11aabce0f8e47b127, type: 3}
+  - {fileID: 21300000, guid: 20d017b32062247dca5f679ea4eaf8a3, type: 3}
+  - {fileID: 21300000, guid: a8736f9f1a211490f80262e240cfd357, type: 3}
+  controls:
+  - {fileID: 21300000, guid: d4392624b50494c879978a4df6acae54, type: 3}
+  - {fileID: 21300000, guid: 605a1057cb62b45098543536ae27735f, type: 3}
+  - {fileID: 21300000, guid: 2a349a122e77d4668996fdc4c6cf99e7, type: 3}
+  - {fileID: 21300000, guid: cdc28d7213e1741a5851aca7d786642a, type: 3}
+  - {fileID: 21300000, guid: 5ccff651e8c7549638663fef09a1d062, type: 3}
+  - {fileID: 21300000, guid: 5e70dda16d8234df49fe65a5ccf00156, type: 3}
+  - {fileID: 21300000, guid: 4c19d7affe5a445aeb5df2e662d9dd71, type: 3}
+  - {fileID: 21300000, guid: 16ae28fc3d4204642bcc6da562927e8b, type: 3}
+  - {fileID: 21300000, guid: e1726479b2e6341078b3f31560895a16, type: 3}
+  - {fileID: 21300000, guid: 1cb023c674f8c4890a4b96e9efe0ffb8, type: 3}
+  presentationSprites:
+  - {fileID: 21300000, guid: 5f29c7b95c5f443b99b56e75c6667b5f, type: 3}
+  - {fileID: 21300000, guid: ebb15b8cd144a4f21898b05475b3e3e2, type: 3}
+  - {fileID: 21300000, guid: f23f2da8022a2487ca3f29a42555b0a3, type: 3}
+  - {fileID: 21300000, guid: 79c4d81f92b15482a9d4774b3c2c1349, type: 3}
+  voiceClips:
+  - {fileID: 8300000, guid: 1562d42ed557944a19e5ec7642901ed9, type: 3}
+  - {fileID: 8300000, guid: fa6f889014f0140bda1a653a4c08b8b9, type: 3}
+  captionTimings: {fileID: 4900000, guid: 7e3c49231b7fe46df8154fbc7cb30ea3, type: 3}
+  music: {fileID: 8300000, guid: ecf66db2e48ea4dbbb1595a85f440360, type: 3}
+  ambience: {fileID: 8300000, guid: 136d082ef8c0a41e3852e4b86166d935, type: 3}
+  arrivalSfx: {fileID: 8300000, guid: 7e57fd1e7dbc24a3183a8946c7dafa07, type: 3}
+  ibisSfx: {fileID: 8300000, guid: dc83383893aef4962b759827f386fa1a, type: 3}

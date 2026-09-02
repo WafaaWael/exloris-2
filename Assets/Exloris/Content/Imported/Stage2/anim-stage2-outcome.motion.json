@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "manifest_id": "MOT-STAGE2-OUTCOME-v01",
+  "semantic_owner": "stage_2_factual_field_path_boat_outcome",
+  "state": "Final",
+  "fps": 30,
+  "duration_seconds": 2.4,
+  "loop": false,
+  "sprites": ["assets/gameplay/out-s2-low-field-layer.png", "assets/gameplay/out-s2-low-path-layer.png", "assets/gameplay/out-s2-low-boat-layer.png", "assets/gameplay/out-s2-middle-field-layer.png", "assets/gameplay/out-s2-middle-path-layer.png", "assets/gameplay/out-s2-middle-boat-layer.png", "assets/gameplay/out-s2-high-field-layer.png", "assets/gameplay/out-s2-high-path-layer.png", "assets/gameplay/out-s2-high-boat-layer.png"],
+  "clips": {"reveal_inspect_settle": {"duration_seconds": 2.4, "key_times_seconds": [0.0, 0.6, 1.8, 2.4], "interpolation": "opacity_ease_out", "scale_animation": false, "selected_hotspot_only": true}},
+  "static_equivalent": {"states": ["before", "after"], "cut_seconds": [0.0, 0.6], "meaning": "same selected hotspot and visible factual change"},
+  "appearances": ["stage_2_outcome"],
+  "playback_tokens": {"fresh_token_per_start": true, "cancelled_stale_duplicate_complete": false, "interruption_invalidates_within_seconds": 0.033334},
+  "acceptance_test_ids": ["AT-S09-S2-001", "AT-S09-TOKEN-009", "AT-STATIC-009"]
+}
