@@ -1,6 +1,11 @@
 using UnityEngine;
 
-public static class SaveSecrets 
+namespace Exloris.Saving
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    internal static class SaveSecrets
+    {
+
+        internal const string KeyBase64 =
+            "CqU7tQTYrWbLzpIUw5Kh+dj2Ev4TOGFNPGMhZ7A3gnU=";
+    }
 }

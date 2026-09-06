@@ -1,42 +1,117 @@
 using UnityEngine;
 
-public class SaveManager : MonoBehaviour
+namespace Exloris.Saving
 {
-    public static SaveManager Instance { get; private set; }
-
-    private const string LevelKey = "SavedLevel";
-    private const string StepKey = "SavedStep";
-
-    private void Awake()
+    public sealed class SaveManager : MonoBehaviour
     {
-        if (Instance != null && Instance != this)
+        public static SaveManager Instance { get; private set; }
+
+        private global::player currentPlayer;
+
+        public PlayerData CurrentData { get; private set; }
+
+        public bool HasLoadedData => CurrentData != null;
+
+        private void Awake()
         {
-            Destroy(gameObject);
-            return;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+            LoadData();
         }
 
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+        /// <summary>
+        /// Registers the player belonging to the current level.
+        /// </summary>
+        public void RegisterPlayer(global::player player)
+        {
+            currentPlayer = player;
 
-    public void SaveProgress(int level, int step)
-    {
-        PlayerPrefs.SetInt(LevelKey, Mathf.Max(1, level));
-        PlayerPrefs.SetInt(StepKey, Mathf.Max(1, step));
-        PlayerPrefs.Save();
-    }
+            if (CurrentData != null)
+            {
+                ApplyDataToPlayer(currentPlayer, CurrentData);
+            }
+        }
 
-    public void LoadProgress(out int level, out int step)
-    {
-        level = PlayerPrefs.GetInt(LevelKey, 1);
-        step = PlayerPrefs.GetInt(StepKey, 1);
-    }
+        public void SaveCurrentPlayer()
+        {
+            if (currentPlayer == null)
+            {
+                Debug.LogWarning(
+                    "Cannot save because no player is registered."
+                );
 
-    public void ResetProgress()
-    {
-        PlayerPrefs.DeleteKey(LevelKey);
-        PlayerPrefs.DeleteKey(StepKey);
-        PlayerPrefs.Save();
+                return;
+            }
+
+            SaveSystem.SavePlayer(currentPlayer);
+            CurrentData = SaveSystem.LoadPlayer();
+
+            Debug.Log("Current player was saved.");
+        }
+
+        public PlayerData LoadData()
+        {
+            CurrentData = SaveSystem.LoadPlayer();
+            return CurrentData;
+        }
+
+        public void LoadCurrentPlayer()
+        {
+            CurrentData = SaveSystem.LoadPlayer();
+
+            if (CurrentData == null)
+                return;
+
+            if (currentPlayer == null)
+            {
+                Debug.LogWarning(
+                    "Data was loaded, but no player is registered."
+                );
+
+                return;
+            }
+
+            ApplyDataToPlayer(currentPlayer, CurrentData);
+        }
+
+        public void DeleteSave()
+        {
+            SaveSystem.DeletePlayerSave();
+            CurrentData = null;
+        }
+
+        private static void ApplyDataToPlayer(
+            global::player player,
+            PlayerData data
+        )
+        {
+            // Change these assignments to match your actual fields.
+            player.Level = data.level;
+            player.Step = data.step;
+           
+        }
+
+        private void OnApplicationPause(bool paused)
+        {
+            if (paused && currentPlayer != null)
+            {
+                SaveCurrentPlayer();
+            }
+        }
+
+        private void OnApplicationQuit()
+        {
+            if (currentPlayer != null)
+            {
+                SaveCurrentPlayer();
+            }
+        }
     }
-  
 }
