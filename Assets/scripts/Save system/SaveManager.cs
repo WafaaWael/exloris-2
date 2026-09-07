@@ -4,6 +4,7 @@ namespace Exloris.Saving
 {
     public sealed class SaveManager : MonoBehaviour
     {
+        [SerializeField] private PlayerAvatarSelector avatarSelector;
         public static SaveManager Instance { get; private set; }
 
         private global::player currentPlayer;
@@ -95,7 +96,7 @@ namespace Exloris.Saving
             // Change these assignments to match your actual fields.
             player.Level = data.level;
             player.Step = data.step;
-           
+
         }
 
         private void OnApplicationPause(bool paused)
@@ -112,6 +113,19 @@ namespace Exloris.Saving
             {
                 SaveCurrentPlayer();
             }
+        }
+        public void SetGender(PlayerGender selectedGender)
+        {
+            if (currentPlayer == null)
+            {
+                Debug.LogWarning(
+                    "Cannot set gender because no player is registered."
+                );
+                return;
+            }
+            CurrentData.gender = selectedGender;
+            currentPlayer.SetGender(selectedGender);
+            avatarSelector.ApplyGender(selectedGender);
         }
     }
 }
