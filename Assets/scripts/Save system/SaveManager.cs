@@ -10,6 +10,7 @@ namespace Exloris.Saving
         private global::player currentPlayer;
 
         public PlayerData CurrentData { get; private set; }
+        public PlayerData CurrentPlayerData { get; private set; }
 
         public bool HasLoadedData => CurrentData != null;
 
@@ -127,5 +128,25 @@ namespace Exloris.Saving
             currentPlayer.SetGender(selectedGender);
             avatarSelector.ApplyGender(selectedGender);
         }
+    
+    public void CreateNewPlayer(PlayerGender gender)
+        {
+            // Initialize the current player data.
+            //CurrentPlayerData = new PlayerData();
+            CurrentPlayerData.gender = gender;
+
+           // SaveSystem.SavePlayerData(CurrentPlayerData);
+        }
+
+        public PlayerData GetCurrentPlayerData()
+        {
+            if (CurrentPlayerData == null)
+            {
+                CurrentPlayerData = SaveSystem.LoadPlayer();
+            }
+
+            return CurrentPlayerData;
+        }
     }
+    
 }
