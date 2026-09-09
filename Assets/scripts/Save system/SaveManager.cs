@@ -1,10 +1,12 @@
 using UnityEngine;
-
+using Exloris.Saving;
+using UnityEngine.Events;
 namespace Exloris.Saving
 {
     public sealed class SaveManager : MonoBehaviour
     {
         [SerializeField] private PlayerAvatarSelector avatarSelector;
+        [SerializeField] private UnityEvent OnLoadedData;
         public static SaveManager Instance { get; private set; }
 
         private global::player currentPlayer;
@@ -26,6 +28,7 @@ namespace Exloris.Saving
             DontDestroyOnLoad(gameObject);
 
             LoadData();
+            
         }
 
         /// <summary>
@@ -39,8 +42,12 @@ namespace Exloris.Saving
             {
                 ApplyDataToPlayer(currentPlayer, CurrentData);
             }
-        }
 
+            if (CurrentPlayerData != null)
+            {
+                ApplyDataToPlayer(currentPlayer, CurrentPlayerData);
+            }
+        }
         public void SaveCurrentPlayer()
         {
             if (currentPlayer == null)
@@ -61,6 +68,24 @@ namespace Exloris.Saving
         public PlayerData LoadData()
         {
             CurrentData = SaveSystem.LoadPlayer();
+
+            if (CurrentData != null)
+            {
+                CurrentPlayerData = CurrentData;
+                Debug.Log(
+                    "Existing player save loaded. "
+                    + "Level: " + CurrentData.level
+                    + ", Step: " + CurrentData.step
+                    + ", Gender: " + CurrentData.gender
+                );
+                OnLoadedData?.Invoke();
+                //addthe logic of a saved player to the game here, such as loading the level and setting the player's position
+            }
+            else
+            {
+                Debug.Log("No existing player save found.");
+            }
+
             return CurrentData;
         }
 
@@ -97,6 +122,7 @@ namespace Exloris.Saving
             // Change these assignments to match your actual fields.
             player.Level = data.level;
             player.Step = data.step;
+            player.SetGender(data.gender);
 
         }
 
@@ -117,27 +143,59 @@ namespace Exloris.Saving
         }
         public void SetGender(PlayerGender selectedGender)
         {
-            if (currentPlayer == null)
+            if (CurrentData == null)
             {
-                Debug.LogWarning(
-                    "Cannot set gender because no player is registered."
-                );
-                return;
+                CurrentData = new PlayerData
+                {
+                    level = 1,
+                    step = 0
+                };
             }
+
             CurrentData.gender = selectedGender;
-            currentPlayer.SetGender(selectedGender);
-            avatarSelector.ApplyGender(selectedGender);
+            CurrentPlayerData = CurrentData;
+            if (currentPlayer != null)
+            {
+                currentPlayer.SetGender(selectedGender);
+                SaveSystem.SavePlayer(currentPlayer);
+            }
+
+            if (avatarSelector != null)
+            {
+                avatarSelector.ApplyGender(selectedGender);
+            }
         }
     
     public void CreateNewPlayer(PlayerGender gender)
         {
-            // Initialize the current player data.
-            //CurrentPlayerData = new PlayerData();
+            if (currentPlayer == null)
+            {
+                Debug.LogWarning(
+                    "Cannot create a player because no player is registered."
+                );
+                return;
+            }
+
+            CurrentPlayerData = new PlayerData(currentPlayer);
             CurrentPlayerData.gender = gender;
-
-           // SaveSystem.SavePlayerData(CurrentPlayerData);
+            currentPlayer.SetGender(gender);
+            SaveSystem.SavePlayer(currentPlayer);
+            Debug.Log("New player created and saved with gender: " + gender);
         }
+    public void CreateNewPlayer()
+    {
+            if (currentPlayer == null)
+            {
+                Debug.LogWarning(
+                    "Cannot create a player because no player is registered."
+                );
+                return;
+            }
 
+            CurrentPlayerData = new PlayerData(currentPlayer);
+            SaveSystem.SavePlayer(currentPlayer);
+            Debug.Log("New player created with default values.");
+    }
         public PlayerData GetCurrentPlayerData()
         {
             if (CurrentPlayerData == null)

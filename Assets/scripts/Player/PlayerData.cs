@@ -7,6 +7,12 @@ public class PlayerData
     public int step;
     public PlayerGender gender;
 
+    public PlayerData()
+    {
+        level = 1;
+        gender = PlayerGender.NotSelected;
+    }
+
     public PlayerData(player player)
     {
         this.level = player.Level;

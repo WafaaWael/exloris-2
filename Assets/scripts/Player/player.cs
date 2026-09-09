@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class player : MonoBehaviour
 {
-    [SerializeField] private int level;
+    [SerializeField] private int level = 1;
     [SerializeField] private int step;
-    [SerializeField] private PlayerGender _gender;
+    [SerializeField] private PlayerGender _gender = PlayerGender.NotSelected;
 
 public PlayerGender Gender => _gender;
     public int Level
@@ -25,6 +25,12 @@ public PlayerGender Gender => _gender;
     private void Start()
     {
        Exloris.Saving.SaveManager.Instance.RegisterPlayer(this);
+    }
+    public void Player()
+    {
+        level = 1;
+        step = 0;
+        _gender = PlayerGender.NotSelected;
     }
 }
 public enum PlayerGender

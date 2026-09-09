@@ -8,8 +8,10 @@ namespace Exloris.Saving
 {
     public static class SaveSystem
     {
-        private const int NonceSize = 12;
-        private const int TagSize = 16;
+        private const int IvSize = 16;
+        private const int HashSize = 32;
+        private static readonly byte[] FileHeader =
+            { (byte)'E', (byte)'X', (byte)'2', (byte)'S' };
 
         private static string SavePath =>
             Path.Combine(
@@ -30,54 +32,73 @@ namespace Exloris.Saving
             string json = JsonUtility.ToJson(data);
             byte[] plainBytes = Encoding.UTF8.GetBytes(json);
 
-            byte[] nonce = new byte[NonceSize];
-            byte[] cipherBytes = new byte[plainBytes.Length];
-            byte[] tag = new byte[TagSize];
+            byte[] iv = new byte[IvSize];
+            byte[] cipherBytes;
 
-            // A new nonce must be generated for every save.
             using (RandomNumberGenerator generator =
                    RandomNumberGenerator.Create())
             {
-                generator.GetBytes(nonce);
+                generator.GetBytes(iv);
             }
 
-            using (AesGcm aes = new AesGcm(Key))
+            using (Aes aes = Aes.Create())
             {
-                aes.Encrypt(
-                    nonce,
-                    plainBytes,
-                    cipherBytes,
-                    tag
-                );
+                aes.Key = Key;
+                aes.IV = iv;
+                aes.Mode = CipherMode.CBC;
+                aes.Padding = PaddingMode.PKCS7;
+
+                using (ICryptoTransform encryptor = aes.CreateEncryptor())
+                {
+                    cipherBytes = encryptor.TransformFinalBlock(
+                        plainBytes,
+                        0,
+                        plainBytes.Length
+                    );
+                }
             }
 
-            // File layout:
-            // [12-byte nonce][16-byte tag][encrypted JSON]
-            byte[] saveBytes =
-                new byte[NonceSize + TagSize + cipherBytes.Length];
-
-            Buffer.BlockCopy(
-                nonce,
-                0,
-                saveBytes,
-                0,
-                NonceSize
-            );
-
-            Buffer.BlockCopy(
-                tag,
-                0,
-                saveBytes,
-                NonceSize,
-                TagSize
-            );
-
+            byte[] authenticatedBytes = new byte[IvSize + cipherBytes.Length];
+            Buffer.BlockCopy(iv, 0, authenticatedBytes, 0, IvSize);
             Buffer.BlockCopy(
                 cipherBytes,
                 0,
-                saveBytes,
-                NonceSize + TagSize,
+                authenticatedBytes,
+                IvSize,
                 cipherBytes.Length
+            );
+
+            byte[] hash;
+            using (HMACSHA256 hmac = new HMACSHA256(Key))
+            {
+                hash = hmac.ComputeHash(authenticatedBytes);
+            }
+
+            byte[] saveBytes =
+                new byte[FileHeader.Length + HashSize + authenticatedBytes.Length];
+
+            Buffer.BlockCopy(
+                FileHeader,
+                0,
+                saveBytes,
+                0,
+                FileHeader.Length
+            );
+
+            Buffer.BlockCopy(
+                hash,
+                0,
+                saveBytes,
+                FileHeader.Length,
+                HashSize
+            );
+
+            Buffer.BlockCopy(
+                authenticatedBytes,
+                0,
+                saveBytes,
+                FileHeader.Length + HashSize,
+                authenticatedBytes.Length
             );
 
             // Base64 allows the encrypted bytes to be saved as text.
@@ -108,57 +129,83 @@ namespace Exloris.Saving
                 byte[] saveBytes =
                     Convert.FromBase64String(encodedSave);
 
-                if (saveBytes.Length < NonceSize + TagSize)
+                if (saveBytes.Length < FileHeader.Length + HashSize + IvSize)
                 {
                     throw new InvalidDataException(
                         "The save file is too short."
                     );
                 }
 
-                byte[] nonce = new byte[NonceSize];
-                byte[] tag = new byte[TagSize];
+                for (int index = 0; index < FileHeader.Length; index++)
+                {
+                    if (saveBytes[index] != FileHeader[index])
+                    {
+                        throw new InvalidDataException(
+                            "The save file uses an unsupported format."
+                        );
+                    }
+                }
 
-                int cipherLength =
-                    saveBytes.Length - NonceSize - TagSize;
-
-                byte[] cipherBytes =
-                    new byte[cipherLength];
-
-                byte[] plainBytes =
-                    new byte[cipherLength];
-
+                byte[] expectedHash = new byte[HashSize];
                 Buffer.BlockCopy(
                     saveBytes,
+                    FileHeader.Length,
+                    expectedHash,
                     0,
-                    nonce,
-                    0,
-                    NonceSize
+                    HashSize
                 );
 
+                int authenticatedLength =
+                    saveBytes.Length - FileHeader.Length - HashSize;
+                byte[] authenticatedBytes = new byte[authenticatedLength];
                 Buffer.BlockCopy(
                     saveBytes,
-                    NonceSize,
-                    tag,
+                    FileHeader.Length + HashSize,
+                    authenticatedBytes,
                     0,
-                    TagSize
+                    authenticatedLength
                 );
 
+                byte[] actualHash;
+                using (HMACSHA256 hmac = new HMACSHA256(Key))
+                {
+                    actualHash = hmac.ComputeHash(authenticatedBytes);
+                }
+
+                if (!CryptographicOperations.FixedTimeEquals(expectedHash, actualHash))
+                {
+                    throw new CryptographicException(
+                        "The save file failed integrity validation."
+                    );
+                }
+
+                byte[] iv = new byte[IvSize];
+                byte[] cipherBytes = new byte[authenticatedLength - IvSize];
+                Buffer.BlockCopy(authenticatedBytes, 0, iv, 0, IvSize);
                 Buffer.BlockCopy(
-                    saveBytes,
-                    NonceSize + TagSize,
+                    authenticatedBytes,
+                    IvSize,
                     cipherBytes,
                     0,
-                    cipherLength
+                    cipherBytes.Length
                 );
 
-                using (AesGcm aes = new AesGcm(Key))
+                byte[] plainBytes;
+                using (Aes aes = Aes.Create())
                 {
-                    aes.Decrypt(
-                        nonce,
-                        cipherBytes,
-                        tag,
-                        plainBytes
-                    );
+                    aes.Key = Key;
+                    aes.IV = iv;
+                    aes.Mode = CipherMode.CBC;
+                    aes.Padding = PaddingMode.PKCS7;
+
+                    using (ICryptoTransform decryptor = aes.CreateDecryptor())
+                    {
+                        plainBytes = decryptor.TransformFinalBlock(
+                            cipherBytes,
+                            0,
+                            cipherBytes.Length
+                        );
+                    }
                 }
 
                 string json =

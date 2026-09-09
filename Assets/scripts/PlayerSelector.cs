@@ -10,5 +10,10 @@ public class PlayerUISelector : MonoBehaviour
     {
         Exloris.Saving.SaveManager.Instance.SetGender(PlayerGender.Female); 
     } 
+    private void CreatePlayer(PlayerGender gender)
+    {
+        Exloris.Saving.SaveManager.Instance.CreateNewPlayer(gender);
+        //SceneManager.LoadSceneAsync(gameplaySceneName);
+    }
 }
 
