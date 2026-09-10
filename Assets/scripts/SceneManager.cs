@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
-
+using UnityEngine.SceneManagement;
 public class SceneManager : MonoBehaviour
 {
     public static SceneManager Instance { get; private set; }
+    public static event System.Action<Scene, LoadSceneMode> sceneLoaded;
 
     private void Awake()
     {
