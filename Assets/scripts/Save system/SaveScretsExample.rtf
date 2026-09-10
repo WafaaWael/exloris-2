@@ -9,6 +9,9 @@
 \{\
     // Template only. Copy this file, rename the copy to\
     // SaveSecrets.cs, and insert the development key.\
+    // this is a base64 encoded 32 byte key, you can generate your own using the following command in a terminal:
+    // openssl rand -base64 32
+    // make sure to keep this key secret, as it is used to encrypt and decrypt your save data
     internal static class SaveSecrets\
     \{\
         internal const string KeyBase64 =\
