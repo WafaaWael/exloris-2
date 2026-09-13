@@ -15,6 +15,16 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Shared
   m_GUID: d8ea0d2316abb4629a2a301404cf85fc
   m_SerializeEntries:
+  - m_GUID: 9181904c43ad64f30b4f6cd7c29f04d6
+    m_Address: Assets/Exloris/Content/Localization/New Table Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da309b071eb764e94ae42840e04b58e4
+    m_Address: Assets/Exloris/Content/Localization/try all Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e7595bbdcc4cf40bfa49144108e68491
     m_Address: Assets/Exloris/Content/Localization/ExlorisStringTable Shared Data.asset
     m_ReadOnly: 1
