@@ -16,7 +16,7 @@ MonoBehaviour:
   m_GUID: 823d8d93e62dc476db99b4973cd10a42
   m_SerializeEntries:
   - m_GUID: b23c6da7c07eb4b36be9af1f0c68a74d
-    m_Address: try all_en
+    m_Address: ExlorisAudioTable_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

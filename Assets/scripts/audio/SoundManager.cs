@@ -21,6 +21,7 @@ public class SoundManager : MonoBehaviour
 	[SerializeField] private List<SoundData> soundList = new List<SoundData>();
 
 	private Dictionary<string, AudioSource> audioSources = new Dictionary<string, AudioSource>();
+	private AudioSource localizedVoiceSource;
 	public bool isMuted = false;
 
 	public static event Action OnSoundPlayed;
@@ -65,6 +66,9 @@ public class SoundManager : MonoBehaviour
 		{
 			AddAudioClip(sound.key, sound.clip, sound.volume);
 		}
+		localizedVoiceSource = Instantiate(audioSourcePrefab, transform);
+		localizedVoiceSource.playOnAwake = false;
+		localizedVoiceSource.loop = false;
 	}
 
 	/// <summary>
@@ -140,6 +144,8 @@ public class SoundManager : MonoBehaviour
 			if (source != null)
 				source.mute = mute;
 		}
+		if (localizedVoiceSource != null)
+			localizedVoiceSource.mute = mute;
 	}
 
 	public void PlayRandomSound()
@@ -157,6 +163,8 @@ public class SoundManager : MonoBehaviour
 			if (source != null)
 				source.Stop();
 		}
+		if (localizedVoiceSource != null)
+			localizedVoiceSource.Stop();
 	}
 
 	public void LoopSound(string key, bool loop)
@@ -180,7 +188,19 @@ public class SoundManager : MonoBehaviour
 	{
 		return audioSources.ContainsKey(key) && audioSources[key].isPlaying;
 	}
+	public void PlayLocalizedClip(AudioClip clip, float volume = 1f)
+	{
+		if (clip == null || localizedVoiceSource == null)
+			return;
 
+		localizedVoiceSource.Stop();
+		localizedVoiceSource.clip = clip;
+		localizedVoiceSource.volume = Mathf.Clamp01(volume);
+		localizedVoiceSource.mute = isMuted;
+		localizedVoiceSource.Play();
+
+		OnSoundPlayed?.Invoke();
+	}
 
 	/// <summary>
 	/// Ensures Android allows audio playback.
