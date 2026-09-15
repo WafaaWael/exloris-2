@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d902b7a457239e447b4b5aaaf1fb237d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310926
+  packageName: "Animation Sequencer \u2013 Visual Tween & Chain Editor"
+  packageVersion: 2.0.0
+  assetPath: Assets/AnimationSequencer/Scripts/Runtime/Core/Enums/AnimationStepEnums.cs
+  uploadId: 736265

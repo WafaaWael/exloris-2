@@ -16,12 +16,14 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: e7595bbdcc4cf40bfa49144108e68491, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 7087151036845522947
   m_TableData:
   - m_Id: 225435648
     m_Localized: Loading
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 7087151036845522947
   - m_Id: 242212864
     m_Localized: Try again
     m_Metadata:
@@ -56,4 +58,10 @@ MonoBehaviour:
       m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7087151036845522947
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 225435648

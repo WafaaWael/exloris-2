@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 40ffc571d56a4c98a19a91c5937cd000
+timeCreated: 1644243703
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310926
+  packageName: "Animation Sequencer \u2013 Visual Tween & Chain Editor"
+  packageVersion: 2.0.0
+  assetPath: Assets/AnimationSequencer/Scripts/Runtime/Core/Steps/WaitForIntervalStep.cs
+  uploadId: 736265

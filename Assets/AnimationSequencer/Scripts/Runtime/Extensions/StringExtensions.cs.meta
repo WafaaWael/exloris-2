@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: b8438b3788e24b698f713488c64c3429
+timeCreated: 1614110387
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310926
+  packageName: "Animation Sequencer \u2013 Visual Tween & Chain Editor"
+  packageVersion: 2.0.0
+  assetPath: Assets/AnimationSequencer/Scripts/Runtime/Extensions/StringExtensions.cs
+  uploadId: 736265

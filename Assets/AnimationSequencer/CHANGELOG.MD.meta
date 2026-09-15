@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: dd73f6096a8214f3f9791e290e499e15
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310926
+  packageName: "Animation Sequencer \u2013 Visual Tween & Chain Editor"
+  packageVersion: 2.0.0
+  assetPath: Assets/AnimationSequencer/CHANGELOG.MD
+  uploadId: 736265

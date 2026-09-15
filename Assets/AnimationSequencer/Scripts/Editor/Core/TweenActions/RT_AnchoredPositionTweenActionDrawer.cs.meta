@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4c0bf271d286a7743aaefcbd4f6bd05a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310926
+  packageName: "Animation Sequencer \u2013 Visual Tween & Chain Editor"
+  packageVersion: 2.0.0
+  assetPath: Assets/AnimationSequencer/Scripts/Editor/Core/TweenActions/RT_AnchoredPositionTweenActionDrawer.cs
+  uploadId: 736265

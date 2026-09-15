@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 365d61de4e58e6a4ab62a0c56fcb8066
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310926
+  packageName: "Animation Sequencer \u2013 Visual Tween & Chain Editor"
+  packageVersion: 2.0.0
+  assetPath: Assets/AnimationSequencer/Scripts/Runtime/Core/TweenActions/AudioSourceVolumeTweenAction.cs
+  uploadId: 736265

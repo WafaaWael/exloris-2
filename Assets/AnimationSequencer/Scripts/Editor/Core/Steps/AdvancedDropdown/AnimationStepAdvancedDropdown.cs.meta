@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 9ce280633e8740eeab77cf332ad5d6ea
+timeCreated: 1614377430
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310926
+  packageName: "Animation Sequencer \u2013 Visual Tween & Chain Editor"
+  packageVersion: 2.0.0
+  assetPath: Assets/AnimationSequencer/Scripts/Editor/Core/Steps/AdvancedDropdown/AnimationStepAdvancedDropdown.cs
+  uploadId: 736265
