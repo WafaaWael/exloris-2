@@ -21,4 +21,25 @@ public class LocalizationID : MonoBehaviour
 
         return entryReference.KeyId == 0 ? string.Empty : entryReference.KeyId.ToString();
     }
+    private void OnEnable()
+    {
+        localizedString.StringChanged += UpdateText;
+        localizedAudio.AssetChanged += UpdateAudio;
+    }
+    private void OnDisable()
+    {
+        localizedString.StringChanged -= UpdateText;
+        localizedAudio.AssetChanged -= UpdateAudio;
+    }
+    private void UpdateText(string text)
+    {
+        if (textMeshProUGUI != null)
+        {
+            textMeshProUGUI.text = text;
+        }
+    }
+    private void UpdateAudio(AudioClip audio)
+    {
+        // Handle audio update
+    }
 }

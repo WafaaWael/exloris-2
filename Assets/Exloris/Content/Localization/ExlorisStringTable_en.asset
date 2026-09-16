@@ -56,6 +56,18 @@ MonoBehaviour:
     m_Localized: Come explore the Nile with me.
     m_Metadata:
       m_Items: []
+  - m_Id: 7251240923684864
+    m_Localized: Explorer School
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7261288655740928
+    m_Localized: Welcome to exlorise school
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7261541496774656
+    m_Localized: Choose School to explore
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
