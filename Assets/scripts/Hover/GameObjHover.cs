@@ -1,31 +1,80 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class GameObjHover : MonoBehaviour
 {
-   [SerializeField] private UnityEvent onHoverEnter;
-   [SerializeField] private UnityEvent onHoverExit;
-   private void OnMouseEnter()
+    [Header("Visual")]
+    [SerializeField] private SpriteRenderer targetSprite;
+
+    [Header("Events")]
+    [SerializeField] private UnityEvent onHoverEnter;
+    [SerializeField] private UnityEvent onHoverExit;
+
+    [Header("Color Effect")]
+    [SerializeField] private bool changeColor = true;
+    [SerializeField] private Color hoverColor = Color.red;
+
+    [Header("Scale Effect")]
+    [SerializeField] private bool changeScale = true;
+    [SerializeField] private float hoverScale = 1.1f;
+
+    private Color originalColor;
+    private Vector3 originalScale;
+
+    private void Awake()
     {
-        onHoverEnter.Invoke();
-        // Change the color of the object when the mouse hovers over it
-        //MatrialRed();
+        originalScale = transform.localScale;
+
+        if (targetSprite == null)
+        {
+            targetSprite =
+                GetComponentInChildren<SpriteRenderer>(true);
+        }
+
+        if (targetSprite != null)
+        {
+            originalColor = targetSprite.color;
+        }
+        else
+        {
+            Debug.LogError(
+                "No SpriteRenderer found on " + gameObject.name,
+                this
+            );
+        }
     }
 
-    public void MatrialRed()
+    private void OnMouseEnter()
     {
-        GetComponent<Renderer>().material.color = Color.red;
+        Debug.Log("Mouse entered: " + gameObject.name);
+
+        if (changeColor && targetSprite != null)
+            targetSprite.color = hoverColor;
+
+        if (changeScale)
+            transform.localScale = originalScale * hoverScale;
+
+        onHoverEnter?.Invoke();
     }
 
     private void OnMouseExit()
     {
-        onHoverExit.Invoke();
-        // Change the color of the object back to its original color when the mouse exits it
-       // MatrialWhite();
+        ResetHover();
+        onHoverExit?.Invoke();
     }
 
-    public void MatrialWhite()
+    private void OnDisable()
     {
-        GetComponent<Renderer>().material.color = Color.white;
+        ResetHover();
+    }
+
+    private void ResetHover()
+    {
+        if (changeColor && targetSprite != null)
+            targetSprite.color = originalColor;
+
+        if (changeScale)
+            transform.localScale = originalScale;
     }
 }
