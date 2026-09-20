@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/player.unity
     guid: 9e9079cab09c9458389c4d36c33319e5
+  - enabled: 1
+    path: Assets/Scenes/Demo.unity
+    guid: f17304faf06914b3e9bd2c5c781021b1
+  - enabled: 1
+    path: Assets/Scenes/Boat.unity
+    guid: 781a05189d8604a94adbadcf4c7a1251
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 1a922e2a1650047a68db18fe34bf07d7, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

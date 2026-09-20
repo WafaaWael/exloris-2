@@ -3981,6 +3981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ca73997899224871afe0d97899e3d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizationID
+  textMeshProUGUI: {fileID: 0}
   localizedString:
     m_TableReference:
       m_TableCollectionName: 
