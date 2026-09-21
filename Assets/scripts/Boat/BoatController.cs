@@ -7,29 +7,37 @@ public class BoatController : MonoBehaviour
     [Header("Input")]
     [SerializeField] private InputActionReference moveAction;
 
-    [Header("Movement")]
-    [SerializeField] private float sidewaysSpeed = 6f;
+    [Header("Step Movement")]
+    [SerializeField, Min(0.01f)] private float stepDistance = 2f;
+    [SerializeField, Min(0.01f)] private float movementSpeed = 8f;
     [SerializeField] private float minimumX = -7f;
     [SerializeField] private float maximumX = 7f;
 
+    [Header("Stick Sensitivity")]
+    [SerializeField, Range(0.1f, 1f)]
+    private float pressThreshold = 0.5f;
+
+    [SerializeField, Range(0f, 0.4f)]
+    private float releaseThreshold = 0.2f;
+
     private Rigidbody2D body;
-    private Vector2 moveInput;
     private float targetX;
     private float fixedY;
+    private bool readyForStep = true;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-
         body.gravityScale = 0f;
         body.freezeRotation = true;
-
-        targetX = transform.position.x;
-        fixedY = transform.position.y;
     }
 
     private void OnEnable()
     {
+        targetX = body.position.x;
+        fixedY = body.position.y;
+        readyForStep = true;
+
         if (moveAction != null)
             moveAction.action.Enable();
     }
@@ -45,15 +53,28 @@ public class BoatController : MonoBehaviour
         if (moveAction == null)
             return;
 
-        moveInput =
-            moveAction.action.ReadValue<Vector2>();
+        float horizontal =
+            moveAction.action.ReadValue<Vector2>().x;
 
-        targetX += moveInput.x *
-                   sidewaysSpeed *
-                   Time.deltaTime;
+        // Releasing the key or centering the stick allows another step.
+        if (Mathf.Abs(horizontal) <= releaseThreshold)
+        {
+            readyForStep = true;
+            return;
+        }
+
+        if (!readyForStep ||
+            Mathf.Abs(horizontal) < pressThreshold)
+        {
+            return;
+        }
+
+        readyForStep = false;
+
+        float direction = horizontal > 0f ? 1f : -1f;
 
         targetX = Mathf.Clamp(
-            targetX,
+            targetX + direction * stepDistance,
             minimumX,
             maximumX
         );
@@ -61,8 +82,12 @@ public class BoatController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        body.MovePosition(
-            new Vector2(targetX, fixedY)
+        float nextX = Mathf.MoveTowards(
+            body.position.x,
+            targetX,
+            movementSpeed * Time.fixedDeltaTime
         );
+
+        body.MovePosition(new Vector2(nextX, fixedY));
     }
 }
