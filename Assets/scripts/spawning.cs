@@ -103,35 +103,48 @@ public class spawning : MonoBehaviour
     }
 
     private void SpawnObject()
+{
+    if (pools.Count == 0)
+        return;
+
+    if (_spawnPoints == null || _spawnPoints.Count == 0)
     {
-        int poolIndex = Random.Range(0, pools.Count);
-        Queue<GameObject> pool = pools[poolIndex];
-
-        // Expand this pool if all its objects are in use.
-        GameObject instance = pool.Count > 0
-            ? pool.Dequeue()
-            : CreatePooledObject(poolIndex);
-
-        Vector3 position = new Vector3(
-            Random.Range(minimumX, maximumX),
-            transform.position.y,
-            transform.position.z
-        );
-
-        instance.transform.SetPositionAndRotation(
-            position,
-            prefabs[poolIndex].transform.rotation
-        );
-
-        instance.transform.localScale =
-            prefabs[poolIndex].transform.localScale;
-
-        activeObjects.Add(
-            new ActiveObject(instance, poolIndex)
-        );
-
-        instance.SetActive(true);
+        Debug.LogWarning("No spawn points assigned.", this);
+        return;
     }
+
+    // Choose a random spawn point.
+    int spawnPointIndex = Random.Range(0, _spawnPoints.Count);
+    Transform spawnPoint = _spawnPoints[spawnPointIndex];
+
+    if (spawnPoint == null)
+    {
+        Debug.LogWarning("The selected spawn point is empty.", this);
+        return;
+    }
+
+    // Choose a random prefab pool.
+    int poolIndex = Random.Range(0, pools.Count);
+    Queue<GameObject> pool = pools[poolIndex];
+
+    GameObject instance = pool.Count > 0
+        ? pool.Dequeue()
+        : CreatePooledObject(poolIndex);
+
+    instance.transform.SetPositionAndRotation(
+        spawnPoint.position,
+        prefabs[poolIndex].transform.rotation
+    );
+
+    instance.transform.localScale =
+        prefabs[poolIndex].transform.localScale;
+
+    activeObjects.Add(
+        new ActiveObject(instance, poolIndex)
+    );
+
+    instance.SetActive(true);
+}
 
     private void MoveObjects()
     {

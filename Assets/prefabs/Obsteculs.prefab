@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6469357108385228489}
   - component: {fileID: 8515490389462260865}
   - component: {fileID: 1096266249630417433}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Obsteculs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
