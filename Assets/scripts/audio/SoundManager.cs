@@ -69,6 +69,7 @@ public class SoundManager : MonoBehaviour
 		localizedVoiceSource = Instantiate(audioSourcePrefab, transform);
 		localizedVoiceSource.playOnAwake = false;
 		localizedVoiceSource.loop = false;
+		PlaySound("BackGround"); // Play background music if it exists
 	}
 
 	/// <summary>

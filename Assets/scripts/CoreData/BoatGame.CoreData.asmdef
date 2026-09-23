@@ -1,0 +1,8 @@
+{
+    "name": "BoatGame.CoreData",
+    "rootNamespace": "BoatGame.CoreData",
+    "references": [
+        "BoatGame.CoreData.Messaging"
+    ],
+    "autoReferenced": true
+}
