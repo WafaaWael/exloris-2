@@ -15,9 +15,10 @@ public class ManagersDetector : MonoBehaviour
         _soundManager = Object.FindAnyObjectByType<SoundManager>();
         if (_soundManager == null)
         {
-            Debug.LogError("SoundManager not found in the scene."); 
+            Debug.LogError("SoundManager not found in the scene.");
         }
     }
+
     public void LoadScene(string sceneName)
     {
         if (_sceneManager != null)
@@ -49,6 +50,17 @@ public class ManagersDetector : MonoBehaviour
         else
         {
             Debug.LogError("Cannot play sound because SoundManager is not found.");
+        }
+    }
+    public void StopAllSound()
+    {
+        if (_soundManager != null)
+        {
+            _soundManager.StopAllSounds();
+        }
+        else
+        {
+            Debug.LogError("Cannot stop sound because SoundManager is not found.");
         }
     }
 }

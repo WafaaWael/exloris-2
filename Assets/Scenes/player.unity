@@ -331,6 +331,7 @@ GameObject:
   - component: {fileID: 152046362}
   - component: {fileID: 152046361}
   - component: {fileID: 152046360}
+  - component: {fileID: 152046364}
   m_Layer: 5
   m_Name: BackGround Girl
   m_TagString: Untagged
@@ -436,6 +437,22 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &152046364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152046358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 346d02fdb5dc34b4b9a3ceaa43f3ea61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BoatGame.Presentation.BoatLevelUI::BoatGame.Presentation.BoatLevelUI.UiPulse
+  _scaleAmount: 0.03
+  _speed: 3
+  _fadeGroup: {fileID: 0}
+  _minAlpha: 1
 --- !u!1 &154662868
 GameObject:
   m_ObjectHideFlags: 0
@@ -1701,6 +1718,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 933823975}
+        m_TargetAssemblyTypeName: ManagersDetector, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Click
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &470797936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2011,6 +2040,7 @@ GameObject:
   - component: {fileID: 615099486}
   - component: {fileID: 615099485}
   - component: {fileID: 615099484}
+  - component: {fileID: 615099488}
   m_Layer: 5
   m_Name: backGround Boy
   m_TagString: Untagged
@@ -2116,6 +2146,22 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &615099488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615099482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 346d02fdb5dc34b4b9a3ceaa43f3ea61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BoatGame.Presentation.BoatLevelUI::BoatGame.Presentation.BoatLevelUI.UiPulse
+  _scaleAmount: 0.03
+  _speed: 3
+  _fadeGroup: {fileID: 0}
+  _minAlpha: 1
 --- !u!1 &678111285
 GameObject:
   m_ObjectHideFlags: 0
@@ -3241,6 +3287,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Map
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 933823975}
+        m_TargetAssemblyTypeName: ManagersDetector, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Click
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1025238969
@@ -5401,6 +5459,18 @@ MonoBehaviour:
           m_StringArgument: Map
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 933823975}
+        m_TargetAssemblyTypeName: ManagersDetector, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Click
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2040215293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5569,6 +5639,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 933823975}
+        m_TargetAssemblyTypeName: ManagersDetector, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Click
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &2095173323
