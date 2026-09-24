@@ -50,5 +50,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 782213c03bdff402ba504d63ab394b9d, type: 3}
   voice: {fileID: 8300000, guid: ff1128a488cea424b8fcfed02b85293d, type: 3}
   captionTiming: {fileID: 4900000, guid: bdd9e58c8b882488ab2074d306e200a3, type: 3}
-  music: {fileID: 8300000, guid: 7532ee44156294309887baaf624ac782, type: 3}
+  music: {fileID: 8300000, guid: ecf66db2e48ea4dbbb1595a85f440360, type: 3}
   ambience: {fileID: 8300000, guid: b74d3d8201e28450f98aa0acf2d103dd, type: 3}

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.anklebreaker.unity-mcp": "https://github.com/AnkleBreaker-Studio/unity-mcp-plugin.git",
     "com.coffee.ui-particle": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
     "com.kitwright.unity.mcp": "https://github.com/kitwright/unity-mcp.git",
     "com.unity.2d.sprite": "1.0.0",

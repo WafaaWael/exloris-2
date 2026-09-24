@@ -66,7 +66,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f642b93cea627477dab015abce9f7324, type: 3}
   - {fileID: 8300000, guid: c8f80b25bc45d43b385f5f9141098265, type: 3}
   captionTimings: {fileID: 4900000, guid: 7edb9e648f99e40a49594093f359a19c, type: 3}
-  music: {fileID: 8300000, guid: 034e3cf3bdb324aefb330814e0d35e30, type: 3}
-  ambience: {fileID: 8300000, guid: 0d2894cb1ddfb4842a52dcdd4ff214da, type: 3}
+  music: {fileID: 8300000, guid: ecf66db2e48ea4dbbb1595a85f440360, type: 3}
+  ambience: {fileID: 8300000, guid: 136d082ef8c0a41e3852e4b86166d935, type: 3}
   arrivalSfx: {fileID: 8300000, guid: 2762d0dcf29d74fc6ad75e6c2860bfbd, type: 3}
   ibisSfx: {fileID: 8300000, guid: 3055ab9d23473483fa1cb10db6d1e25b, type: 3}

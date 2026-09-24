@@ -62,7 +62,7 @@ MonoBehaviour:
   captionTimings: {fileID: 4900000, guid: d299a2be0f0cd48629efc01b88d60f65, type: 3}
   outcomeMotion: {fileID: 4900000, guid: 2c0c1cfc557df4ef1b725e24965bfc3e, type: 3}
   music: {fileID: 8300000, guid: 4e0a2f417c69b412ba2aacae59e097a9, type: 3}
-  ambience: {fileID: 8300000, guid: 6820929623873483d98acdd9b3f32b4b, type: 3}
+  ambience: {fileID: 8300000, guid: e0cf73e8b4fbe4f1dad3572ce4ef43c9, type: 3}
   stoneSfx:
   - {fileID: 8300000, guid: eb8b2341ec2ed4ceeac22b3109f4b8e4, type: 3}
   - {fileID: 8300000, guid: ed500da14645842d496bd8b402a433cf, type: 3}
