@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 57cc7f1044f7a7a4fbcd835e0f9ee684
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - waterMaterial: {fileID: 2100000, guid: b81fc210b4417c44cb894cbfa31f797d, type: 2}
+  - boxCollider: {instanceID: 0}
+  - buoyancyEffector: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346638
+  packageName: Interactive Pixel Water
+  packageVersion: 1.0.5
+  assetPath: Assets/Cainos/Interactive Pixel Water/Script/PixelWater.cs
+  uploadId: 1000192

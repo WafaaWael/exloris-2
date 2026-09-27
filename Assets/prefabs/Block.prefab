@@ -323,7 +323,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7892709833187547953, guid: 17219d608dfb141508ea405a5b5f22d5, type: 3}
+  m_Sprite: {fileID: -7892709833187547953, guid: 679978f7dd9554f7fb0b1839b7518e26, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5865670524570963042, guid: 893c883d2c2cd412ea985213d7f70b93, type: 3}
+  m_Sprite: {fileID: 5865670524570963042, guid: bc67fc50f25b24da9897fa7ec311c2c6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -636,6 +636,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1113809917037812886}
     m_Modifications:
+    - target: {fileID: 412432966633446836, guid: 5937948c498ce49a388abac046f0ac45, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7951065913655704117, guid: a7b99c9b93ce61649b8d85f9f882fc80, type: 2}
     - target: {fileID: 2566564941175717249, guid: 5937948c498ce49a388abac046f0ac45, type: 3}
       propertyPath: m_Name
       value: LocalizeRTLText
@@ -666,7 +670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8277634331722008039, guid: 5937948c498ce49a388abac046f0ac45, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 65.75
+      value: 69.52
       objectReference: {fileID: 0}
     - target: {fileID: 8277634331722008039, guid: 5937948c498ce49a388abac046f0ac45, type: 3}
       propertyPath: m_SizeDelta.y
@@ -706,7 +710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8277634331722008039, guid: 5937948c498ce49a388abac046f0ac45, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -121.2411
+      value: -119.5661
       objectReference: {fileID: 0}
     - target: {fileID: 8277634331722008039, guid: 5937948c498ce49a388abac046f0ac45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -738,6 +742,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1113809917037812886}
     m_Modifications:
+    - target: {fileID: 412432966633446836, guid: 5937948c498ce49a388abac046f0ac45, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7951065913655704117, guid: a7b99c9b93ce61649b8d85f9f882fc80, type: 2}
     - target: {fileID: 2566564941175717249, guid: 5937948c498ce49a388abac046f0ac45, type: 3}
       propertyPath: m_Name
       value: LocalizeRTLText (1)
@@ -768,7 +776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8277634331722008039, guid: 5937948c498ce49a388abac046f0ac45, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 65.75
+      value: 69.52
       objectReference: {fileID: 0}
     - target: {fileID: 8277634331722008039, guid: 5937948c498ce49a388abac046f0ac45, type: 3}
       propertyPath: m_SizeDelta.y
@@ -808,7 +816,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8277634331722008039, guid: 5937948c498ce49a388abac046f0ac45, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -202.59221
+      value: -200.9172
       objectReference: {fileID: 0}
     - target: {fileID: 8277634331722008039, guid: 5937948c498ce49a388abac046f0ac45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 04a4785d924d1ce4587f857c45d85722
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346638
+  packageName: Interactive Pixel Water
+  packageVersion: 1.0.5
+  assetPath: Assets/Cainos/Interactive Pixel Water/Shader/ASE Pixel Water Splash.shader
+  uploadId: 1000192
