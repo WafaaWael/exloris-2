@@ -7,7 +7,7 @@ public class PlayerAvatarSelector : MonoBehaviour
 
     private void Start()
     {
-      //  ApplyGender(Exloris.Saving.SaveManager.Instance.CurrentData?.gender ?? PlayerGender.NotSelected);
+        ApplyGender(Exloris.Saving.SaveManager.Instance.CurrentData?.gender ?? PlayerGender.NotSelected);
     }
 
     public void ApplyGender(PlayerGender gender)

@@ -11,11 +11,27 @@ namespace BoatGame.Presentation.BoatLevelUI
         [SerializeField] private Image[] _stars = new Image[0];
         [SerializeField] private Sprite _fullSprite;
         [SerializeField] private Sprite _emptySprite;
+        [SerializeField] private int _maxStars = 3;
 
         private int _shown = -1;
         private int _poppingIndex = -1;
         private float _popTime;
+        private int _currentStars=3;
+        public void CountStars(int count, bool isAnimated)
+        {
+            _currentStars = _currentStars - count;
 
+            if (count < 0 || count > _stars.Length)
+            {
+                Debug.LogError($"Invalid star count {count} for {name}");
+                return;
+            }
+            if (_currentStars >= 0)
+            {
+                //_currentStars = _maxStars - count;
+                ShowStars(_currentStars, isAnimated);
+            }
+        }
         public void ShowStars(int count, bool isAnimated)
         {
             for (int i = 0; i < _stars.Length; i++)

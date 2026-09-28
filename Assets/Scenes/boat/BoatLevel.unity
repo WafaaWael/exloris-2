@@ -4037,6 +4037,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5119840833019438399, guid: dcfb67905d319df42971f229f870f22f, type: 3}
   m_PrefabInstance: {fileID: 202356650}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &205729645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 205729647}
+  - component: {fileID: 205729646}
+  m_Layer: 0
+  m_Name: ManagersDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &205729646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205729645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76554774f4ca44996bc19e7a3d465e35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ManagersDetector
+--- !u!4 &205729647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205729645}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.57003, y: 1.75569, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &217763340
 GameObject:
   m_ObjectHideFlags: 0
@@ -33733,6 +33777,7 @@ MonoBehaviour:
   - {fileID: 29403145}
   _fullSprite: {fileID: 21300000, guid: 33aaad7b5c46e8f559c52ff066dd0343, type: 3}
   _emptySprite: {fileID: 21300000, guid: db6047bb85f715313b4d17c8e6120978, type: 3}
+  _maxStars: 3
 --- !u!1001 &2036838258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36862,6 +36907,38 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 265070583}
+    - target: {fileID: 6153198918018345702, guid: 06e8e53ab540040e4bbe476e2d3ba07d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153198918018345702, guid: 06e8e53ab540040e4bbe476e2d3ba07d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153198918018345702, guid: 06e8e53ab540040e4bbe476e2d3ba07d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 205729646}
+    - target: {fileID: 6153198918018345702, guid: 06e8e53ab540040e4bbe476e2d3ba07d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153198918018345702, guid: 06e8e53ab540040e4bbe476e2d3ba07d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153198918018345702, guid: 06e8e53ab540040e4bbe476e2d3ba07d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ManagersDetector, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153198918018345702, guid: 06e8e53ab540040e4bbe476e2d3ba07d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: NiloMeter
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153198918018345702, guid: 06e8e53ab540040e4bbe476e2d3ba07d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6694703753689009449, guid: 06e8e53ab540040e4bbe476e2d3ba07d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -36960,3 +37037,4 @@ SceneRoots:
   - {fileID: 539048026}
   - {fileID: 938632977}
   - {fileID: 293259777}
+  - {fileID: 205729647}

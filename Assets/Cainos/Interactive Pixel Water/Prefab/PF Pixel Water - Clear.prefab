@@ -100,8 +100,7 @@ MonoBehaviour:
   bubbleAmountMul: 1
   bubbleColorOutline: {r: 0.85882354, g: 0.9529412, b: 0.9529412, a: 0.34901962}
   bubbleColorFill: {r: 0.4012104, g: 0.5283019, b: 0.4606298, a: 0.14901961}
-  bubblePrefab: {fileID: 1354388899100067157, guid: ba918cd723b452b4c80cc3c7dcbaea8c,
-    type: 3}
+  bubblePrefab: {fileID: 1354388899100067157, guid: ba918cd723b452b4c80cc3c7dcbaea8c, type: 3}
   splashEnabled: 1
   splashOnEnter: 1
   splashOnExit: 1
@@ -112,23 +111,19 @@ MonoBehaviour:
   - sizeRange: {x: 0, y: 0.2}
     minSpeed: 0.5
     minDepth: 0
-    splashPrefab: {fileID: 5800786323235578726, guid: e03b07e211ce1664faafa53bf1b64cb9,
-      type: 3}
+    splashPrefab: {fileID: 5800786323235578726, guid: e03b07e211ce1664faafa53bf1b64cb9, type: 3}
   - sizeRange: {x: 0.2, y: 0.4}
     minSpeed: 1.5
     minDepth: 0.1
-    splashPrefab: {fileID: 5800786323235578726, guid: 71e85c26489236d4899df3b6a181e804,
-      type: 3}
+    splashPrefab: {fileID: 5800786323235578726, guid: 71e85c26489236d4899df3b6a181e804, type: 3}
   - sizeRange: {x: 0.4, y: 1.2}
     minSpeed: 1.5
     minDepth: 0.12
-    splashPrefab: {fileID: 5800786323235578726, guid: ade0a54f6cb471945a03674b1e63ab06,
-      type: 3}
+    splashPrefab: {fileID: 5800786323235578726, guid: ade0a54f6cb471945a03674b1e63ab06, type: 3}
   - sizeRange: {x: 1.2, y: 100}
     minSpeed: 2
     minDepth: 0.2
-    splashPrefab: {fileID: 5800786323235578726, guid: ebdd47cc02199d6419e9dfd31e9ee9e6,
-      type: 3}
+    splashPrefab: {fileID: 5800786323235578726, guid: ebdd47cc02199d6419e9dfd31e9ee9e6, type: 3}
   surfaceParticleEnabled: 0
   surfaceParticleConfigs: []
   inWaterParticleEnabled: 0
@@ -158,6 +153,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -179,9 +179,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1866009694136763870
 MeshFilter:
@@ -193,6 +195,7 @@ MeshFilter:
   m_Mesh: {fileID: 0}
 --- !u!253 &9021447951967945863
 BuoyancyEffector2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -205,8 +208,8 @@ BuoyancyEffector2D:
     m_Bits: 2147483647
   m_SurfaceLevel: 2.1553402
   m_Density: 20
-  m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_LinearDamping: 5
+  m_AngularDamping: 0
   m_FlowAngle: 0
   m_FlowMagnitude: 0
   m_FlowVariation: 0
@@ -218,6 +221,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866009694136763843}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -241,7 +245,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 1
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 1.0776701}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -252,6 +257,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 5.8777466, y: 2.1553402}
   m_EdgeRadius: 0
