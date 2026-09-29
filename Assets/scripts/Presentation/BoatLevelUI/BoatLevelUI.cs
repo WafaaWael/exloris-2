@@ -66,7 +66,8 @@ namespace BoatGame.Presentation.BoatLevelUI
         public void OnButtonClick_Next()
         {
             EventBus.Publish(new PlaySfxEvent(SfxId.UiTap));
-            _levelFlow.Value.LoadNextSection();
+            // Load the next section
+            //_levelFlow.Value.LoadNextSection();
         }
 
         private void Awake()

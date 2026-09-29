@@ -9,6 +9,9 @@ namespace BoatGame.Presentation.BoatLevelUI
         [SerializeField] private float _speed = 3f;
         [SerializeField] private CanvasGroup _fadeGroup;
         [SerializeField] private float _minAlpha = 1f;
+        [SerializeField] private bool _loop = true;
+        [SerializeField] private int _animationTimes = 0; // 0 = infinite
+        [SerializeField] private float _animationInterval = 1f;
 
         private Transform _transform;
         private Vector3 _baseScale;
@@ -24,7 +27,13 @@ namespace BoatGame.Presentation.BoatLevelUI
         {
             _phase = 0f;
         }
-
+        private void Start()
+        {
+            if (_animationTimes > 0&&!_loop)
+            {
+                StartCoroutine(AnimateForTime(_animationTimes, _animationInterval));
+            }
+        }
         private void OnDisable()
         {
             if (_transform != null)
@@ -34,6 +43,37 @@ namespace BoatGame.Presentation.BoatLevelUI
         }
 
         private void Update()
+        {
+            if (_loop)
+            {
+                Animation();
+            }
+        }
+private System.Collections.IEnumerator AnimateForTime(float duration, float interval)
+{
+    float endTime = Time.time + duration;
+
+    while (Time.time < endTime)
+    {
+        Animation();
+
+        if (_phase >= Mathf.PI * 2f)
+        {
+            _phase = 0f;
+        }
+
+        yield return new WaitForSeconds(interval);
+    }
+
+    _loop = false;
+    _transform.localScale = _baseScale;
+
+    if (_fadeGroup != null)
+    {
+        _fadeGroup.alpha = 1f;
+    }
+}
+        private void Animation()
         {
             _phase += Time.unscaledDeltaTime * _speed;
             float wave = 0.5f + 0.5f * Mathf.Sin(_phase);
