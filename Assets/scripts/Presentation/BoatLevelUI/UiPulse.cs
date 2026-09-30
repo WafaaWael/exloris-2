@@ -16,7 +16,7 @@ namespace BoatGame.Presentation.BoatLevelUI
         private Transform _transform;
         private Vector3 _baseScale;
         private float _phase;
-
+        private bool _isAnimating=true;
         private void Awake()
         {
             _transform = transform;
@@ -48,6 +48,9 @@ namespace BoatGame.Presentation.BoatLevelUI
             {
                 Animation();
             }
+            else if (_isAnimating &&!_loop)            {
+                StartCoroutine(AnimateForTime(_animationTimes, _animationInterval));
+            }
         }
 private System.Collections.IEnumerator AnimateForTime(float duration, float interval)
 {
@@ -66,6 +69,7 @@ private System.Collections.IEnumerator AnimateForTime(float duration, float inte
     }
 
     _loop = false;
+    _isAnimating = false;
     _transform.localScale = _baseScale;
 
     if (_fadeGroup != null)
