@@ -1,31 +1,32 @@
-using Cainos.InteractivePixelWater;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
 public class WaterAnimator : MonoBehaviour
 {
-    [SerializeField] private PixelWater _pixelWater;
-    [SerializeField] private float _targetYSize = 6f;
+    [SerializeField] private GameObject _water2D;
+    [SerializeField] private List<float> _targetYSize = new List<float> { 6f };
     [SerializeField] private float _animationDuration = 1f;
-    [SerializeField] private UnityEvent2 _onAnimationComplete;
+    [SerializeField] private List<UnityEvent> _onAnimationComplete;
     //target y size = number 18
     public void AnimateYSize()
     {
-        if (_pixelWater == null)
+        if (_water2D == null)
         {
-            Debug.LogError("PixelWater reference is missing!", this);
+            Debug.LogError("Water2D reference is missing!", this);
             return;
         }
+        SpriteRenderer _water2DRenderer = _water2D.GetComponent<SpriteRenderer>();
 
         DOTween.To(
-              () => _pixelWater.Size.y,
-              y => _pixelWater.Size = new Vector2(_pixelWater.Size.x, y),
-              _targetYSize,
+              () => _water2D.transform.position.y,
+              y => _water2D.transform.position = new Vector2(_water2D.transform.position.x, y),
+              _targetYSize[0],
               _animationDuration
           )
           .SetEase(Ease.InOutSine)
-          .OnComplete(() => _onAnimationComplete.Invoke());
+          .OnComplete(() => _onAnimationComplete[0].Invoke());
     }
 
     private void Start()
