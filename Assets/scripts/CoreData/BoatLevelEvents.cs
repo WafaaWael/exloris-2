@@ -12,6 +12,7 @@ namespace BoatGame.CoreData
         Arriving,
         Arrived,
         Complete,
+        Lesson,
     }
 
     public enum SfxId
@@ -23,6 +24,9 @@ namespace BoatGame.CoreData
         LaneMove,
         Win,
         UiTap,
+        Correct,
+        Wrong,
+        WaterRise,
     }
 
     public readonly struct LevelStateChangedEvent : IEvent
@@ -101,6 +105,17 @@ namespace BoatGame.CoreData
         public PlayVoiceEvent(AudioClip clip)
         {
             Clip = clip;
+        }
+    }
+
+    /// <summary>Raised when a voice line starts and when it ends, so the speaker can switch to a talking pose and back.</summary>
+    public readonly struct VoiceActivityEvent : IEvent
+    {
+        public readonly bool IsSpeaking;
+
+        public VoiceActivityEvent(bool isSpeaking)
+        {
+            IsSpeaking = isSpeaking;
         }
     }
 }

@@ -1,7 +1,7 @@
-using UnityEngine;
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices; // For iOS native calls
+using BoatGame.CoreGameSystems.Audio;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [Serializable]
@@ -12,227 +12,250 @@ public struct SoundData
 	[Range(0f, 1f)] public float volume;
 }
 
-public class SoundManager : MonoBehaviour
+/// <summary>
+/// Compatibility façade for older callers that address sounds by string key.
+/// AudioService owns all AudioSources and is the single place that performs playback.
+/// </summary>
+public sealed class SoundManager : MonoBehaviour
 {
 	public static SoundManager Instance { get; private set; }
-
-	[Header("Audio Settings")]
-	[SerializeField] private AudioSource audioSourcePrefab;
-	[SerializeField] private List<SoundData> soundList = new List<SoundData>();
-
-	private Dictionary<string, AudioSource> audioSources = new Dictionary<string, AudioSource>();
-	private AudioSource localizedVoiceSource;
-	public bool isMuted = false;
-
 	public static event Action OnSoundPlayed;
 
-	void OnEnable()
+	[Header("Audio Service")]
+	[SerializeField] private AudioService audioService;
+
+	[Header("Legacy Sound-Key Mapping")]
+	[SerializeField] private List<SoundData> soundList = new List<SoundData>();
+	[SerializeField] private string backgroundMusicKey = "BackGround";
+	[SerializeField] private bool playBackgroundOnAwake = true;
+
+	private readonly Dictionary<string, SoundData> sounds = new Dictionary<string, SoundData>();
+	public bool isMuted = false;
+
+	void Awake()
+	{
+		if (Instance != null && Instance != this)
+		{
+			Destroy(gameObject);
+			return;
+		}
+
+		Instance = this;
+		// Unity only preserves root GameObjects. This component is currently a child of the
+		// main-menu "systems" object, so detach it before making the singleton persistent.
+		if (transform.parent != null)
+		{
+			transform.SetParent(null);
+		}
+
+		DontDestroyOnLoad(gameObject);
+		ResolveAudioService();
+
+		foreach (var sound in soundList)
+		{
+			if (!string.IsNullOrWhiteSpace(sound.key) && sound.clip != null)
+			{
+				sounds[sound.key] = sound;
+			}
+		}
+
+		audioService?.SetMuted(isMuted);
+
+		if (playBackgroundOnAwake)
+		{
+			SetLoopMusic(backgroundMusicKey);
+		}
+	}
+
+	private void OnDestroy()
+	{
+		if (Instance == this)
+		{
+			Instance = null;
+		}
+	}
+
+	private void OnEnable()
 	{
 		SceneManager.sceneLoaded += HandleSceneLoaded;
 	}
 
-	void OnDisable()
+	private void OnDisable()
 	{
 		SceneManager.sceneLoaded -= HandleSceneLoaded;
 	}
 
 	private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
-		StopAllSounds();
-	}
-
-
-	void Awake()
-	{
-		if (Instance == null)
-		{
-			Instance = this;
-			DontDestroyOnLoad(gameObject);
-
-#if UNITY_IOS
-            InitializeIOSAudio();
-#elif UNITY_ANDROID
-            InitializeAndroidAudio();
-#endif
-		}
-		else
-		{
-			Destroy(gameObject);
-			return;
-		}
-
-		// Load all sounds
-		foreach (var sound in soundList)
-		{
-			AddAudioClip(sound.key, sound.clip, sound.volume);
-		}
-		localizedVoiceSource = Instantiate(audioSourcePrefab, transform);
-		localizedVoiceSource.playOnAwake = false;
-		localizedVoiceSource.loop = false;
-		PlaySound("BackGround"); // Play background music if it exists
-	}
-
-	/// <summary>
-	/// Ensures audio plays correctly on Android.
-	/// </summary>
-	private void InitializeAndroidAudio()
-	{
-#if UNITY_ANDROID
-        AudioListener.pause = false;
-        AudioListener.volume = 1.0f;
-#endif
-	}
-
-	/// <summary>
-	/// Initializes iOS audio session.
-	/// </summary>
-	private void InitializeIOSAudio()
-	{
-#if UNITY_IOS
-        _SetAudioSessionCategory();
-#endif
+		ResolveAudioService();
+		audioService?.SetMuted(isMuted);
 	}
 
 	public void AddAudioClip(string key, AudioClip clip, float volume = 1f)
 	{
-		if (!audioSources.ContainsKey(key) && clip != null)
+		if (string.IsNullOrWhiteSpace(key) || clip == null || sounds.ContainsKey(key))
 		{
-			AudioSource newSource = Instantiate(audioSourcePrefab, transform);
-			newSource.clip = clip;
-			newSource.volume = volume;
-			newSource.playOnAwake = false;
-			newSource.loop = false;
-			audioSources[key] = newSource;
+			return;
+		}
+
+		SoundData sound = new SoundData { key = key, clip = clip, volume = Mathf.Clamp01(volume) };
+		sounds.Add(key, sound);
+		soundList.Add(sound);
+	}
+
+	/// <summary>Sets a clip from the key map as AudioService's looping music track.</summary>
+	public void SetLoopMusic(string key)
+	{
+		if (TryGetSound(key, out SoundData sound))
+		{
+			SetLoopMusic(sound.clip);
+		}
+	}
+
+	/// <summary>Sets the AudioService music source to loop this clip.</summary>
+	public void SetLoopMusic(AudioClip clip)
+	{
+		if (clip == null || !ResolveAudioService())
+		{
+			return;
+		}
+
+		audioService.SetLoopMusic(clip);
+		OnSoundPlayed?.Invoke();
+	}
+
+	public void StopLoopMusic()
+	{
+		if (ResolveAudioService())
+		{
+			audioService.StopMusic();
 		}
 	}
 
 	public void PlaySound(string key)
 	{
-		if (isMuted || !audioSources.ContainsKey(key) || audioSources[key] == null)
+		if (isMuted || !TryGetSound(key, out SoundData sound))
 			return;
 
-#if UNITY_IOS
-        RequestAudioFocus();
-#elif UNITY_ANDROID
-        RequestAndroidAudioFocus();
-#endif
+		if (key == backgroundMusicKey)
+		{
+			SetLoopMusic(sound.clip);
+			return;
+		}
 
-		audioSources[key].Play();
+		audioService.PlaySfx(sound.clip, sound.volume);
 		OnSoundPlayed?.Invoke();
 	}
 
 	public void StopSound(string key)
 	{
-		if (audioSources.ContainsKey(key) && audioSources[key] != null)
+		if (key == backgroundMusicKey)
 		{
-			audioSources[key].Stop();
+			StopLoopMusic();
 		}
 	}
 
 	public void SetVolume(string key, float volume)
 	{
-		if (audioSources.ContainsKey(key))
+		if (!sounds.TryGetValue(key, out SoundData sound))
 		{
-			audioSources[key].volume = Mathf.Clamp01(volume);
+			return;
+		}
+
+		sound.volume = Mathf.Clamp01(volume);
+		sounds[key] = sound;
+		for (int i = 0; i < soundList.Count; i++)
+		{
+			if (soundList[i].key == key)
+			{
+				soundList[i] = sound;
+				break;
+			}
 		}
 	}
 
 	public void MuteAll(bool mute)
 	{
 		isMuted = mute;
-		foreach (var source in audioSources.Values)
+		if (ResolveAudioService())
 		{
-			if (source != null)
-				source.mute = mute;
+			audioService.SetMuted(mute);
 		}
-		if (localizedVoiceSource != null)
-			localizedVoiceSource.mute = mute;
 	}
 
 	public void PlayRandomSound()
 	{
-		if (audioSources.Count == 0 || isMuted) return;
-		List<string> keys = new List<string>(audioSources.Keys);
+		if (sounds.Count == 0 || isMuted) return;
+		List<string> keys = new List<string>(sounds.Keys);
 		string randomKey = keys[UnityEngine.Random.Range(0, keys.Count)];
 		PlaySound(randomKey);
 	}
 
 	public void StopAllSounds()
 	{
-		foreach (var source in audioSources.Values)
+		if (ResolveAudioService())
 		{
-			if (source != null)
-				source.Stop();
+			audioService.StopAll();
 		}
-		if (localizedVoiceSource != null)
-			localizedVoiceSource.Stop();
 	}
 
+	/// <summary>
+	/// Legacy API. AudioService only supports looping music here; use SetLoopMusic for new callers.
+	/// </summary>
 	public void LoopSound(string key, bool loop)
 	{
-		if (!audioSources.ContainsKey(key) || audioSources[key] == null)
-			return;
-
-		audioSources[key].loop = loop;
-
-		if (loop && !audioSources[key].isPlaying)
+		if (loop)
 		{
-			audioSources[key].Play();
+			SetLoopMusic(key);
 		}
-		else if (!loop)
+		else if (key == backgroundMusicKey)
 		{
-			audioSources[key].Stop();
+			StopLoopMusic();
 		}
 	}
 
 	public bool IsPlaying(string key)
 	{
-		return audioSources.ContainsKey(key) && audioSources[key].isPlaying;
+		return key == backgroundMusicKey && ResolveAudioService() && audioService.IsMusicPlaying;
 	}
+
 	public void PlayLocalizedClip(AudioClip clip, float volume = 1f)
 	{
-		if (clip == null || localizedVoiceSource == null)
+		if (isMuted || clip == null || !ResolveAudioService())
 			return;
 
-		localizedVoiceSource.Stop();
-		localizedVoiceSource.clip = clip;
-		localizedVoiceSource.volume = Mathf.Clamp01(volume);
-		localizedVoiceSource.mute = isMuted;
-		localizedVoiceSource.Play();
+		audioService.PlayVoice(clip, volume);
 
 		OnSoundPlayed?.Invoke();
 	}
 
-	/// <summary>
-	/// Ensures Android allows audio playback.
-	/// </summary>
-	private void RequestAndroidAudioFocus()
+	private bool TryGetSound(string key, out SoundData sound)
 	{
-#if UNITY_ANDROID
-        using (var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
-        using (var activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity"))
-        using (var audioManager = activity.Call<AndroidJavaObject>("getSystemService", "audio"))
-        {
-            int result = audioManager.Call<int>("requestAudioFocus", null, 3, 2);
-        }
-#endif
+		sound = default;
+		if (!ResolveAudioService())
+		{
+			Debug.LogWarning("SoundManager could not find an AudioService.", this);
+			return false;
+		}
+
+		if (string.IsNullOrWhiteSpace(key) || !sounds.TryGetValue(key, out sound))
+		{
+			Debug.LogWarning($"No sound is registered with key '{key}'.", this);
+			return false;
+		}
+
+		return true;
 	}
 
-	/// <summary>
-	/// Ensures iOS allows background sound playback.
-	/// </summary>
-	private void RequestAudioFocus()
+	private bool ResolveAudioService()
 	{
-#if UNITY_IOS
-        _SetAudioSessionCategory();
-#endif
-	}
+		if (audioService != null)
+		{
+			return true;
+		}
 
-	/// <summary>
-	/// Native iOS function to set the AVAudioSession category.
-	/// </summary>
-#if UNITY_IOS
-    [DllImport("__Internal")]
-    private static extern void _SetAudioSessionCategory();
-#endif
+		audioService = GetComponent<AudioService>();
+		audioService ??= FindAnyObjectByType<AudioService>();
+		return audioService != null;
+	}
 }

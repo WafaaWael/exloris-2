@@ -33,6 +33,13 @@ namespace BoatGame.CoreGameSystems.Audio
         [SerializeField] private AudioClip _ambience;
         [SerializeField] private SfxEntry[] _sfx = Array.Empty<SfxEntry>();
 
+        [Header("Player volume settings (mixer exposed params, base level at slider = 1)")]
+        [SerializeField] private AudioMixer _mixer;
+        [SerializeField] private float _musicBaseDb = -18f;
+        [SerializeField] private float _ambienceBaseDb = -12f;
+        [SerializeField] private float _sfxBaseDb = -7f;
+        [SerializeField] private float _voiceBaseDb;
+
         [Header("Mixer snapshots")]
         [SerializeField] private AudioMixerSnapshot _gameplaySnapshot;
         [SerializeField] private AudioMixerSnapshot _pausedSnapshot;
@@ -55,6 +62,10 @@ namespace BoatGame.CoreGameSystems.Audio
         private float _duck;                 // 0 = no duck, 1 = fully ducked
         private float _duckHoldLeft;
         private bool _isStoryScreen;         // intro / arrival: keep the music down for the whole conversation
+        private bool _isVoiceActive;
+        private bool _isVoiceHeld;          // a line paused mid-way still counts as being spoken
+        private bool _isPaused;
+        private LevelState _levelState;
 
         private void Awake()
         {
@@ -66,6 +77,8 @@ namespace BoatGame.CoreGameSystems.Audio
             EventBus.Subscribe<PlaySfxEvent>(PlaySfxCallback);
             EventBus.Subscribe<PlayVoiceEvent>(PlayVoiceCallback);
             EventBus.Subscribe<LevelStateChangedEvent>(LevelStateChangedCallback);
+            EventBus.Subscribe<AudioSettingsChangedEvent>(AudioSettingsChangedCallback);
+            EventBus.Subscribe<GamePausedEvent>(GamePausedCallback);
         }
 
         private void OnDisable()
@@ -73,15 +86,124 @@ namespace BoatGame.CoreGameSystems.Audio
             EventBus.Unsubscribe<PlaySfxEvent>(PlaySfxCallback);
             EventBus.Unsubscribe<PlayVoiceEvent>(PlayVoiceCallback);
             EventBus.Unsubscribe<LevelStateChangedEvent>(LevelStateChangedCallback);
+            EventBus.Unsubscribe<AudioSettingsChangedEvent>(AudioSettingsChangedCallback);
+            EventBus.Unsubscribe<GamePausedEvent>(GamePausedCallback);
         }
 
         private void Start()
         {
-            StartLoop(_musicSource, _music);
-            StartLoop(_ambienceSource, _ambience);
+            ApplyPlayerVolumes();
+            if (_musicSource != null && !_musicSource.isPlaying)
+            {
+                StartLoop(_musicSource, _music);
+            }
+
+            if (_ambienceSource != null && !_ambienceSource.isPlaying)
+            {
+                StartLoop(_ambienceSource, _ambience);
+            }
+
             _musicFade = 0f;
             _musicFadeTarget = 1f;
             ApplyVolumes();
+        }
+
+        /// <summary>
+        /// Plays <paramref name="clip" as the active looping music track. A playing track is faded out before the
+        /// new one starts, while the same track is simply resumed.
+        /// </summary>
+        public void SetLoopMusic(AudioClip clip)
+        {
+            if (_musicSource == null || clip == null)
+            {
+                return;
+            }
+
+            if (_musicSource.clip == clip)
+            {
+                _pendingMusic = null;
+                _musicSource.loop = true;
+                if (!_musicSource.isPlaying)
+                {
+                    _musicSource.Play();
+                }
+
+                _musicFadeTarget = 1f;
+                return;
+            }
+
+            if (!_musicSource.isPlaying || _musicSource.clip == null)
+            {
+                _pendingMusic = null;
+                StartLoop(_musicSource, clip);
+                _musicFade = 0f;
+                _musicFadeTarget = 1f;
+                return;
+            }
+
+            CrossfadeMusic(clip);
+        }
+
+        /// <summary>Stops the current music track and cancels a queued music change.</summary>
+        public void StopMusic()
+        {
+            _pendingMusic = null;
+            _musicFade = 0f;
+            _musicFadeTarget = 0f;
+            _musicSource?.Stop();
+        }
+
+        /// <summary>True while the dedicated music source is playing.</summary>
+        public bool IsMusicPlaying => _musicSource != null && _musicSource.isPlaying;
+
+        /// <summary>Plays a one-shot clip through the SFX mixer route.</summary>
+        public void PlaySfx(AudioClip clip, float volume = 1f)
+        {
+            if (_sfxSource == null || clip == null)
+            {
+                return;
+            }
+
+            _sfxSource.PlayOneShot(clip, Mathf.Clamp01(volume));
+        }
+
+        /// <summary>Plays a voice clip, replacing any voice line currently playing.</summary>
+        public void PlayVoice(AudioClip clip, float volume = 1f)
+        {
+            if (_voiceSource == null)
+            {
+                return;
+            }
+
+            _voiceSource.Stop();
+            _isVoiceHeld = false;
+            if (clip == null)
+            {
+                return;
+            }
+
+            _voiceSource.clip = clip;
+            _voiceSource.volume = Mathf.Clamp01(volume);
+            _voiceSource.Play();
+        }
+
+        /// <summary>Mutes or unmutes all sources owned by this service.</summary>
+        public void SetMuted(bool muted)
+        {
+            if (_musicSource != null) _musicSource.mute = muted;
+            if (_ambienceSource != null) _ambienceSource.mute = muted;
+            if (_sfxSource != null) _sfxSource.mute = muted;
+            if (_voiceSource != null) _voiceSource.mute = muted;
+        }
+
+        /// <summary>Stops all currently playing clips and cancels a queued music change.</summary>
+        public void StopAll()
+        {
+            StopMusic();
+            _ambienceSource?.Stop();
+            _sfxSource?.Stop();
+            _voiceSource?.Stop();
+            _isVoiceHeld = false;
         }
 
         private void Update()
@@ -90,6 +212,18 @@ namespace BoatGame.CoreGameSystems.Audio
             UpdateDuck(dt);
             UpdateMusicFade(dt);
             ApplyVolumes();
+            UpdateVoiceActivity();
+        }
+
+        // whole-line state (not loudness): the speaker holds one talking pose for the line instead of flickering
+        private void UpdateVoiceActivity()
+        {
+            bool isActive = _voiceSource != null && (_voiceSource.isPlaying || _isVoiceHeld);
+            if (isActive != _isVoiceActive)
+            {
+                _isVoiceActive = isActive;
+                EventBus.Publish(new VoiceActivityEvent(isActive));
+            }
         }
 
         private void UpdateDuck(float dt)
@@ -134,6 +268,25 @@ namespace BoatGame.CoreGameSystems.Audio
             {
                 _ambienceSource.volume = DbToGain(_voiceDuckAmbienceDb * duck);
             }
+        }
+
+        private void ApplyPlayerVolumes()
+        {
+            if (_mixer == null)
+            {
+                return;
+            }
+
+            _mixer.SetFloat("MusicVolume", _musicBaseDb + SliderToDb(GameSettings.Music));
+            _mixer.SetFloat("AmbienceVolume", _ambienceBaseDb + SliderToDb(GameSettings.Sounds));
+            _mixer.SetFloat("SfxVolume", _sfxBaseDb + SliderToDb(GameSettings.Sounds));
+            _mixer.SetFloat("VoiceVolume", _voiceBaseDb + SliderToDb(GameSettings.Voice));
+        }
+
+        /// <summary>Slider 0..1 to a dB offset: 1 = 0 dB, 0.5 ≈ -12 dB, 0 = silent. Squared curve feels even to the ear.</summary>
+        private static float SliderToDb(float value)
+        {
+            return value <= 0.001f ? SilentDb : 20f * Mathf.Log10(value * value);
         }
 
         private static float ComputeFadeGain(float fade01)
@@ -195,16 +348,17 @@ namespace BoatGame.CoreGameSystems.Audio
 
         private void LevelStateChangedCallback(LevelStateChangedEvent evt)
         {
-            _isStoryScreen = evt.Current == LevelState.Intro || evt.Current == LevelState.Arrived;
+            _levelState = evt.Current;
+            _isStoryScreen = evt.Current == LevelState.Intro || evt.Current == LevelState.Arrived || evt.Current == LevelState.Lesson;
 
             AudioMixerSnapshot snapshot = SelectSnapshot(evt.Current);
-            if (snapshot != null)
+            if (snapshot != null && _isPaused == false)
             {
                 // the mixer runs in unscaled-time mode, so this blend also works while paused
                 snapshot.TransitionTo(_snapshotBlendSeconds);
             }
 
-            if (evt.Current == LevelState.Arrived)
+            if (evt.Current == LevelState.Arrived || evt.Current == LevelState.Complete)
             {
                 CrossfadeMusic(_victoryMusic);
             }
@@ -225,21 +379,40 @@ namespace BoatGame.CoreGameSystems.Audio
             }
         }
 
-        private void PlayVoiceCallback(PlayVoiceEvent evt)
+        private void GamePausedCallback(GamePausedEvent evt)
         {
+            _isPaused = evt.IsPaused;
+            AudioMixerSnapshot snapshot = _isPaused ? _pausedSnapshot : SelectSnapshot(_levelState);
+            if (snapshot != null)
+            {
+                snapshot.TransitionTo(_snapshotBlendSeconds);
+            }
+
             if (_voiceSource == null)
             {
                 return;
             }
 
-            _voiceSource.Stop();
-            if (evt.Clip == null)
+            if (_isPaused)
             {
-                return;
+                _isVoiceHeld = _voiceSource.isPlaying;
+                _voiceSource.Pause();
             }
+            else
+            {
+                _isVoiceHeld = false;
+                _voiceSource.UnPause();
+            }
+        }
 
-            _voiceSource.clip = evt.Clip;
-            _voiceSource.Play();
+        private void AudioSettingsChangedCallback(AudioSettingsChangedEvent evt)
+        {
+            ApplyPlayerVolumes();
+        }
+
+        private void PlayVoiceCallback(PlayVoiceEvent evt)
+        {
+            PlayVoice(evt.Clip);
         }
     }
 }
