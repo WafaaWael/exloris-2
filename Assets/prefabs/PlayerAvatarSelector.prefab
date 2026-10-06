@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 7718906858117781576}
   - component: {fileID: 5462473092326515324}
   - component: {fileID: 327100320100000001}
+  - component: {fileID: 6479193895468589551}
   m_Layer: 0
   m_Name: Boy
   m_TagString: Untagged
@@ -163,6 +164,43 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6479193895468589551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2400372617410851680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58cd0052da6e345a19986b7801cec2a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoatGame.Presentation.SharedUI.CharacterExpressions
+  _renderer: {fileID: 5462473092326515324}
+  _image: {fileID: 0}
+  _frames:
+  - Mood: 0
+    Closed: {fileID: 21300000, guid: 3849ecc1fdf324f25bdd85fe383d05be, type: 3}
+    Talk: {fileID: 0}
+  - Mood: 2
+    Closed: {fileID: 21300000, guid: fcd2ec72fdd0840caba1fb4a8b55b17e, type: 3}
+    Talk: {fileID: 0}
+  - Mood: 5
+    Closed: {fileID: 21300000, guid: 922200b6662474d2fb2436aa94f11c2d, type: 3}
+    Talk: {fileID: 0}
+  - Mood: 6
+    Closed: {fileID: 21300000, guid: 78e6e60f4dfd542acabaa25161e8aebc, type: 3}
+    Talk: {fileID: 0}
+  - Mood: 7
+    Closed: {fileID: 21300000, guid: f10bd9ff3e55545a4b3b1557a3e9ca54, type: 3}
+    Talk: {fileID: 0}
+  - Mood: 8
+    Closed: {fileID: 21300000, guid: 60385efece18f4023815795ecf86c45a, type: 3}
+    Talk: {fileID: 0}
+  _isVoiceDriven: 0
+  _breathAmount: 0.012
+  _breathSpeed: 2.2
+  _hopHeight: 0.05
 --- !u!1 &8848408589062522437
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,6 +212,7 @@ GameObject:
   - component: {fileID: 5988796328580167844}
   - component: {fileID: 4694174397574536369}
   - component: {fileID: 327100320100000002}
+  - component: {fileID: 4385177076959362797}
   m_Layer: 0
   m_Name: Girl
   m_TagString: Untagged
@@ -278,3 +317,40 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4385177076959362797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848408589062522437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58cd0052da6e345a19986b7801cec2a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoatGame.Presentation.SharedUI.CharacterExpressions
+  _renderer: {fileID: 4694174397574536369}
+  _image: {fileID: 0}
+  _frames:
+  - Mood: 0
+    Closed: {fileID: 21300000, guid: d7ba163d7f4e4441dab3b1b4902dfd8f, type: 3}
+    Talk: {fileID: 0}
+  - Mood: 2
+    Closed: {fileID: 21300000, guid: 05e71abb91ec146fd9126d1f068cf6d8, type: 3}
+    Talk: {fileID: 0}
+  - Mood: 5
+    Closed: {fileID: 21300000, guid: 2d40810cceab84622901d23705486ca6, type: 3}
+    Talk: {fileID: 0}
+  - Mood: 6
+    Closed: {fileID: 21300000, guid: a7e38441ec32e42dc8c96379b71cae53, type: 3}
+    Talk: {fileID: 0}
+  - Mood: 7
+    Closed: {fileID: 21300000, guid: a72d8b0f6de014914b58915a9d74cea5, type: 3}
+    Talk: {fileID: 0}
+  - Mood: 8
+    Closed: {fileID: 21300000, guid: 9c6b7c45ac5c5477db98444a33e7b216, type: 3}
+    Talk: {fileID: 0}
+  _isVoiceDriven: 0
+  _breathAmount: 0.012
+  _breathSpeed: 2.2
+  _hopHeight: 0.05

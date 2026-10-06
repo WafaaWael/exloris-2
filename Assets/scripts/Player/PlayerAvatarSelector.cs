@@ -34,4 +34,19 @@ public class PlayerAvatarSelector : MonoBehaviour
                 break;
         }
     }
+    public PlayerGender GetCurrentGender()
+    {
+        if (boyAvatar.activeSelf)
+        {
+            return PlayerGender.Male;
+        }
+        else if (girlAvatar.activeSelf)
+        {
+            return PlayerGender.Female;
+        }
+        else
+        {
+            return PlayerGender.NotSelected;
+        }
+    }
 }
