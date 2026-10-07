@@ -156,7 +156,7 @@ namespace BoatGame.Presentation.BoatLevelUI
                     _tutorialFooter.text = evt.Current == LevelState.Paused ? "Tap to continue" : "Tap to start!";
                     break;
                 case LevelState.Settings:
-                     ShowHud(flow);
+                    ShowHud(flow);
                     _settingsScreen.SetActive(true);
                     break;
                 case LevelState.Playing:

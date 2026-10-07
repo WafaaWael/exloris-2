@@ -42,6 +42,9 @@ public sealed class NilometerUI : MonoBehaviour
 
     [Header("Water and current Tail UI")]
     [SerializeField] private WaterOperator _waterOperator;
+    [SerializeField] private float _endWaterLevelY = -15f;
+    [SerializeField, Min(0f), Tooltip("Seconds to wait after the lesson begins before moving the water to its final level.")]
+    private float _endWaterMoveDelay = 2f;
     [SerializeField] private Tail[] _questionPanels = Array.Empty<Tail>();
     [SerializeField] private StarsDisplay _starsDisplay;
     [SerializeField] private GameObject _completeLevelDisplay;
@@ -94,6 +97,7 @@ public sealed class NilometerUI : MonoBehaviour
     private CharacterMood[] _activeElderMoods;
     private CharacterExpressions _traveler;
     private Coroutine _correctAnswerFeedbackRoutine;
+    private Coroutine _endWaterMoveRoutine;
 
     private void Awake()
     {
@@ -318,6 +322,11 @@ public sealed class NilometerUI : MonoBehaviour
             case PendingDialogue.StartLesson:
                 ShowOnlyPanel(-1);
                 SetActive(_lessonBanner, true);
+                if (_endWaterMoveRoutine != null)
+                {
+                    StopCoroutine(_endWaterMoveRoutine);
+                }
+                _endWaterMoveRoutine = StartCoroutine(MoveEndWaterAfterDelay());
                 _traveler?.SetMood(CharacterMood.Idle);
                 PlayLines(_lessonLines, _lessonMoods, PendingDialogue.StartCubitLesson);
                 break;
@@ -392,22 +401,46 @@ public sealed class NilometerUI : MonoBehaviour
         }
     }
 
+    private IEnumerator MoveEndWaterAfterDelay()
+    {
+        if (_endWaterMoveDelay > 0f)
+        {
+            yield return new WaitForSeconds(_endWaterMoveDelay);
+        }
+
+        _waterOperator?.MoveWaterTemp(_endWaterLevelY);
+        _endWaterMoveRoutine = null;
+    }
+
     private IEnumerator ShowCorrectAnswerFeedback(int levelIndex, int answerIndex)
     {
         Button2 correctButton = GetAnswerButton(levelIndex, answerIndex);
         SetCorrectAnswerVisual(correctButton, true);
 
-        if (_correctAnswerFeedbackDuration > 0f)
+        float glowDuration = GetGlowDuration(levelIndex);
+        if (glowDuration > 0f)
         {
-            yield return new WaitForSeconds(_correctAnswerFeedbackDuration);
+            yield return new WaitForSeconds(glowDuration);
         }
 
         SetCorrectAnswerVisual(correctButton, false);
+        // NilometerUI owns closing the Tail buttons and continuing the level.
+        // Tail only owns the temporary tick/glow visual.
         ShowOnlyPanel(-1);
         _correctAnswerFeedbackRoutine = null;
 
         PlaySingleLine(SelectCorrectLine(_waterOperator.GetCorrectDialogueLineIndex(levelIndex)), CharacterMood.Happy,
             levelIndex + 1 < _waterOperator.LevelCount ? PendingDialogue.MoveToNextLevel : PendingDialogue.StartLesson);
+    }
+
+    private float GetGlowDuration(int levelIndex)
+    {
+        if (levelIndex >= 0 && levelIndex < _questionPanels.Length && _questionPanels[levelIndex] != null)
+        {
+            return _questionPanels[levelIndex].GlowDuration;
+        }
+
+        return _correctAnswerFeedbackDuration;
     }
 
     private void SelectTravelerFromAvatarSelector()

@@ -81,6 +81,7 @@ namespace BoatGame.Presentation.SharedUI
             _soundsSlider.onValueChanged.AddListener(SoundsChangedCallback);
             _voiceSlider.onValueChanged.AddListener(VoiceChangedCallback);
             _closeButton.onClick.AddListener(OnButtonClick_Close);
+            Open();
  
         }
 

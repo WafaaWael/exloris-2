@@ -72,7 +72,7 @@ public sealed class WaterOperator : MonoBehaviour
         _isAnimating = true;
         _currentLevelIndex = levelIndex;
         WaterLevel level = _waterLevels[levelIndex];
-        _waterAnimator.AnimateYSize(level.TargetY, () => CompleteMove(levelIndex, level.TargetY), level.Duration);
+        _waterAnimator.AnimateYSize(level.TargetY, () => CompleteMove(levelIndex, level.TargetY));
         return true;
     }
 
@@ -80,7 +80,14 @@ public sealed class WaterOperator : MonoBehaviour
     {
         return MoveToLevel(_currentLevelIndex + 1);
     }
+    public void MoveWaterTemp(float targetY){
+        if (_waterAnimator == null)
+        {
+            return;
+        }
 
+        _waterAnimator.AnimateYSize(targetY);
+    }
     public bool IsCorrectAnswer(int levelIndex, int answerIndex)
     {
         return levelIndex >= 0
