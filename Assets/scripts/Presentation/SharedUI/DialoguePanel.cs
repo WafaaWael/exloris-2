@@ -20,6 +20,7 @@ namespace BoatGame.Presentation.SharedUI
     {
         public event Action OnFinished;
         public event Action<int> OnLineStarted;
+        public event Action<int> OnVoiceStarted;
 
         private const float MaxTypingDelta = 1f / 20f;
         private const float FirstLineDelay = 0.4f;
@@ -173,6 +174,10 @@ namespace BoatGame.Presentation.SharedUI
                 _elapsed = 0f;
                 _voiceStartDsp = AudioSettings.dspTime;
                 EventBus.Publish(new PlayVoiceEvent(_activeLines[_lineIndex].Voice));
+                if (_activeLines[_lineIndex].Voice != null)
+                {
+                    OnVoiceStarted?.Invoke(_lineIndex);
+                }
             }
 
             // follow the audio clock when it runs ahead (frame hitch), frame time otherwise (audio muted/disabled)

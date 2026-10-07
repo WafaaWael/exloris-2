@@ -16,6 +16,7 @@ namespace BoatGame.Presentation.BoatLevelUI
     public class DialoguePanel : MonoBehaviour
     {
         public event Action OnFinished;
+        public event Action<int> OnLineStarted;
 
         private const float MaxTypingDelta = 1f / 20f;
         private const float FirstLineDelay = 0.4f;
@@ -131,6 +132,7 @@ namespace BoatGame.Presentation.BoatLevelUI
             _isVoiceStarted = false;
             _isTyping = true;
             _continueHint.SetActive(false);
+            OnLineStarted?.Invoke(index);
         }
 
         private void FinishTyping()

@@ -25,9 +25,12 @@ namespace BoatGame.Presentation.SharedUI
         private bool _isRefreshing;
         private bool _isSoundsDirty;
         private bool _isVoiceDirty;
+        private bool _pausedGameplay;
+        private float _timeScaleBeforeOpen;
 
         public void Open()
         {
+            PauseGameplay();
             _isRefreshing = true;
             _musicSlider.value = GameSettings.Music;
             _soundsSlider.value = GameSettings.Sounds;
@@ -41,9 +44,35 @@ namespace BoatGame.Presentation.SharedUI
 
         public void OnButtonClick_Close()
         {
-            EventBus.Publish(new PlaySfxEvent(SfxId.UiTap));
+            //EventBus.Publish(new PlaySfxEvent(SfxId.UiTap));
             GameSettings.Save();
+            ResumeGameplay();
             gameObject.SetActive(false);
+        }
+
+        private void PauseGameplay()
+        {
+            if (_pausedGameplay)
+            {
+                return;
+            }
+
+            _timeScaleBeforeOpen = Time.timeScale;
+            Time.timeScale = 0f;
+            _pausedGameplay = true;
+            EventBus.Publish(new GamePausedEvent(true));
+        }
+
+        private void ResumeGameplay()
+        {
+            if (_pausedGameplay == false)
+            {
+                return;
+            }
+
+            Time.timeScale = _timeScaleBeforeOpen;
+            _pausedGameplay = false;
+            EventBus.Publish(new GamePausedEvent(false));
         }
 
         private void Awake()
@@ -57,6 +86,7 @@ namespace BoatGame.Presentation.SharedUI
 
         private void OnDestroy()
         {
+            ResumeGameplay();
             _musicSlider.onValueChanged.RemoveListener(MusicChangedCallback);
             _soundsSlider.onValueChanged.RemoveListener(SoundsChangedCallback);
             _voiceSlider.onValueChanged.RemoveListener(VoiceChangedCallback);

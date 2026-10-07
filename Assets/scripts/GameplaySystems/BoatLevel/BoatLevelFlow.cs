@@ -64,6 +64,30 @@ namespace BoatGame.GameplaySystems.BoatLevel
             _input.IsInputEnabled = false;
             SetState(LevelState.Paused);
         }
+        public void Opensettings()
+        {
+            if (State != LevelState.Playing)
+            {
+                return;
+            }
+
+            Time.timeScale = 0f;
+            _input.IsInputEnabled = false;
+            SetState(LevelState.Settings);
+        }
+
+        public void CloseSettings()
+        {
+            if (State != LevelState.Settings)
+            {
+                return;
+            }
+
+            Time.timeScale = 1f;
+            _boat.IsMoving = true;
+            _input.IsInputEnabled = true;
+            SetState(LevelState.Playing);
+        }
 
         public void CompleteArrival()
         {

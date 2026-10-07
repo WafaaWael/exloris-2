@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using BoatGame.CoreData;
+using BoatGame.CoreData.Messaging;
 using BoatGame.Presentation.BoatLevelUI;
 using BoatGame.Presentation.SharedUI;
 using UnityEngine;
@@ -21,6 +22,7 @@ public sealed class NilometerUI : MonoBehaviour
     {
         None,
         StartFirstLevel,
+        StartWaterMove,
         ShowQuestion,
         ResumeQuestion,
         MoveToNextLevel,
@@ -39,6 +41,8 @@ public sealed class NilometerUI : MonoBehaviour
     [SerializeField] private WaterOperator _waterOperator;
     [SerializeField] private Tail[] _questionPanels = Array.Empty<Tail>();
     [SerializeField] private StarsDisplay _starsDisplay;
+    [SerializeField] private GameObject _completeLevelDisplay;
+    [SerializeField] private StarsDisplay _completeStarsDisplay;
     [SerializeField, Min(0)] private int _startingStars = 3;
     [SerializeField] private AnswerSubmittedEvent _onAnswerSubmitted = new AnswerSubmittedEvent();
     [SerializeField] private UnityEvent _onCompleted = new UnityEvent();
@@ -57,6 +61,8 @@ public sealed class NilometerUI : MonoBehaviour
     [SerializeField] private DialogueLine[] _cubitLines = Array.Empty<DialogueLine>();
     [SerializeField] private CharacterMood[] _cubitMoods = Array.Empty<CharacterMood>();
     [SerializeField] private Button2 _hintButton;
+    [SerializeField, Min(0f), Tooltip("Seconds after the water-rise voice begins before the water animation starts.")]
+    private float _waterAnimationDelayAfterVoiceStarts = 1f;
 
     [Header("Characters")]
     [SerializeField] private PlayerAvatarSelector _playerAvatarSelector;
@@ -75,6 +81,9 @@ public sealed class NilometerUI : MonoBehaviour
     private int _starsRemaining;
     private int _attemptsForLevel;
     private int _hintIndex;
+    private int _pendingWaterLevelIndex = -1;
+    private bool _waitingForWaterMoveDelay;
+    private bool _waterMoveStarted;
     private bool _acceptingAnswers;
     private PendingDialogue _pendingDialogue;
     private CharacterMood[] _activeElderMoods;
@@ -95,6 +104,7 @@ public sealed class NilometerUI : MonoBehaviour
         {
             _dialogue.OnFinished += DialogueFinishedCallback;
             _dialogue.OnLineStarted += DialogueLineStartedCallback;
+            _dialogue.OnVoiceStarted += DialogueVoiceStartedCallback;
         }
 
         if (_hintButton != null)
@@ -147,6 +157,7 @@ public sealed class NilometerUI : MonoBehaviour
         {
             _dialogue.OnFinished -= DialogueFinishedCallback;
             _dialogue.OnLineStarted -= DialogueLineStartedCallback;
+            _dialogue.OnVoiceStarted -= DialogueVoiceStartedCallback;
         }
 
         if (_hintButton != null)
@@ -195,6 +206,7 @@ public sealed class NilometerUI : MonoBehaviour
         _attemptsForLevel++;
         _starsRemaining = Mathf.Max(0, _starsRemaining - 1);
         _starsDisplay?.ShowStars(_starsRemaining, true);
+        EventBus.Publish(new PlaySfxEvent(SfxId.StarLost));
         SetButtonInteractable(levelIndex, answerIndex, false);
 
         if (_attemptsForLevel < 2)
@@ -223,14 +235,7 @@ public sealed class NilometerUI : MonoBehaviour
         _elder?.SetMood(CharacterMood.Idle);
         _traveler?.SetMood(CharacterMood.Think);
 
-        DialogueLine ask = SelectAskLine(levelIndex);
-        if (string.IsNullOrEmpty(ask.Text))
-        {
-            CompletePendingDialogue(PendingDialogue.ShowQuestion);
-            return;
-        }
-
-        PlaySingleLine(ask, CharacterMood.Point, PendingDialogue.ShowQuestion);
+        CompletePendingDialogue(PendingDialogue.ShowQuestion);
     }
 
     private void PlayLines(DialogueLine[] lines, CharacterMood[] moods, PendingDialogue pending)
@@ -269,14 +274,28 @@ public sealed class NilometerUI : MonoBehaviour
         }
     }
 
+    private void DialogueVoiceStartedCallback(int index)
+    {
+        if (_pendingDialogue != PendingDialogue.StartWaterMove || _waterMoveStarted || _waitingForWaterMoveDelay)
+        {
+            return;
+        }
+
+        _waitingForWaterMoveDelay = true;
+        StartCoroutine(StartWaterMoveAfterVoiceDelay());
+    }
+
     private void CompletePendingDialogue(PendingDialogue pending)
     {
         switch (pending)
         {
             case PendingDialogue.StartFirstLevel:
-                if (_waterOperator == null || _waterOperator.MoveToLevel(0) == false)
+                BeginWaterLevel(0);
+                break;
+            case PendingDialogue.StartWaterMove:
+                if (_waterMoveStarted == false && _waitingForWaterMoveDelay == false)
                 {
-                    Debug.LogWarning("NilometerUI could not start the first water level.", this);
+                    MoveWaterToPendingLevel();
                 }
                 break;
             case PendingDialogue.ShowQuestion:
@@ -288,7 +307,7 @@ public sealed class NilometerUI : MonoBehaviour
             case PendingDialogue.MoveToNextLevel:
                 ShowOnlyPanel(-1);
                 _dialogue?.Hide();
-                _waterOperator?.MoveToNextLevel();
+                BeginWaterLevel(_waterOperator != null ? _waterOperator.CurrentLevelIndex + 1 : -1);
                 break;
             case PendingDialogue.StartLesson:
                 ShowOnlyPanel(-1);
@@ -307,8 +326,60 @@ public sealed class NilometerUI : MonoBehaviour
                 _elder?.SetMood(CharacterMood.Happy);
                 _traveler?.SetMood(CharacterMood.Happy);
                 _traveler?.PlayHop();
+                EventBus.Publish(new PlaySfxEvent(SfxId.Win));
                 _onCompleted?.Invoke();
+                _dialogue?.Hide();
+                _completeLevelDisplay?.SetActive(true);
+                _completeStarsDisplay?.gameObject.SetActive(true);
+                _completeStarsDisplay?.ShowStars(_starsRemaining, true);
                 break;
+        }
+    }
+
+    private void BeginWaterLevel(int levelIndex)
+    {
+        if (_waterOperator == null || levelIndex < 0 || levelIndex >= _waterOperator.LevelCount)
+        {
+            Debug.LogWarning("NilometerUI could not start the requested water level.", this);
+            return;
+        }
+
+        _pendingWaterLevelIndex = levelIndex;
+        _waitingForWaterMoveDelay = false;
+        _waterMoveStarted = false;
+        DialogueLine risingPrompt = SelectAskLine(levelIndex);
+        if (string.IsNullOrEmpty(risingPrompt.Text))
+        {
+            MoveWaterToPendingLevel();
+            return;
+        }
+
+        PlaySingleLine(risingPrompt, CharacterMood.Point, PendingDialogue.StartWaterMove);
+    }
+
+    private void MoveWaterToPendingLevel()
+    {
+        int levelIndex = _pendingWaterLevelIndex;
+        _pendingWaterLevelIndex = -1;
+        _waterMoveStarted = true;
+
+        if (_waterOperator == null || _waterOperator.MoveToLevel(levelIndex) == false)
+        {
+            Debug.LogWarning("NilometerUI could not animate the requested water level.", this);
+        }
+    }
+
+    private IEnumerator StartWaterMoveAfterVoiceDelay()
+    {
+        if (_waterAnimationDelayAfterVoiceStarts > 0f)
+        {
+            yield return new WaitForSeconds(_waterAnimationDelayAfterVoiceStarts);
+        }
+
+        _waitingForWaterMoveDelay = false;
+        if (_waterMoveStarted == false)
+        {
+            MoveWaterToPendingLevel();
         }
     }
 

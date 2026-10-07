@@ -23,6 +23,10 @@ namespace BoatGame.Presentation.BoatLevelUI
         [SerializeField] private TMP_Text _tutorialText;
         [SerializeField] private TMP_Text _tutorialFooter;
 
+        [Header("Settings")]
+        [SerializeField] private GameObject _settingsScreen;
+        [SerializeField] private Button2 _settingsCloseButton;
+
         [Header("HUD")]
         [SerializeField] private GameObject _hud;
         [SerializeField] private StarsDisplay _hudStars;
@@ -49,12 +53,19 @@ namespace BoatGame.Presentation.BoatLevelUI
         {
             EventBus.Publish(new PlaySfxEvent(SfxId.UiTap));
             _levelFlow.Value.StartPlaying();
+            Debug.Log("OnButtonClick_TutorialTap: OnButtonClick_TutorialTap called, starting level");
         }
 
         public void OnButtonClick_Help()
         {
             EventBus.Publish(new PlaySfxEvent(SfxId.UiTap));
             _levelFlow.Value.OpenHelp();
+        }
+
+        public void OnButtonClick_CloseSettings()
+        {
+            EventBus.Publish(new PlaySfxEvent(SfxId.UiTap));
+            _levelFlow.Value.CloseSettings();
         }
 
         public void OnButtonClick_Replay()
@@ -92,6 +103,7 @@ namespace BoatGame.Presentation.BoatLevelUI
             EventBus.Subscribe<CoinCollectedEvent>(CoinCollectedCallback);
             EventBus.Subscribe<LevelProgressEvent>(LevelProgressCallback);
             EventBus.Subscribe<BoatBlockedEvent>(BoatBlockedCallback);
+            _settingsCloseButton.onClick.AddListener(OnButtonClick_CloseSettings);
         }
 
         private void OnDisable()
@@ -101,6 +113,7 @@ namespace BoatGame.Presentation.BoatLevelUI
             EventBus.Unsubscribe<CoinCollectedEvent>(CoinCollectedCallback);
             EventBus.Unsubscribe<LevelProgressEvent>(LevelProgressCallback);
             EventBus.Unsubscribe<BoatBlockedEvent>(BoatBlockedCallback);
+            _settingsCloseButton.onClick.RemoveListener(OnButtonClick_CloseSettings);
         }
 
         private void OnDestroy()
@@ -117,6 +130,7 @@ namespace BoatGame.Presentation.BoatLevelUI
         {
             _introScreen.SetActive(false);
             _tutorialOverlay.SetActive(false);
+            _settingsScreen.SetActive(false);
             _hud.SetActive(false);
             _blockedHint.SetActive(false);
             _arrivalBanner.SetActive(false);
@@ -140,6 +154,10 @@ namespace BoatGame.Presentation.BoatLevelUI
                     ShowHud(flow);
                     _tutorialOverlay.SetActive(true);
                     _tutorialFooter.text = evt.Current == LevelState.Paused ? "Tap to continue" : "Tap to start!";
+                    break;
+                case LevelState.Settings:
+                     ShowHud(flow);
+                    _settingsScreen.SetActive(true);
                     break;
                 case LevelState.Playing:
                     ShowHud(flow);

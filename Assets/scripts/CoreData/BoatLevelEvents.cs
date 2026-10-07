@@ -9,6 +9,7 @@ namespace BoatGame.CoreData
         Tutorial,
         Playing,
         Paused,
+        Settings,
         Arriving,
         Arrived,
         Complete,

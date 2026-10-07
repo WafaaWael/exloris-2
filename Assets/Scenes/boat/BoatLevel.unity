@@ -3885,7 +3885,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -4096,6 +4096,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 217763341}
+  - component: {fileID: 217763342}
   m_Layer: 0
   m_Name: IntroScreen
   m_TagString: Untagged
@@ -4127,6 +4128,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &217763342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217763340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a45f7900b76548aaa69704d9acbf797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoatGame.Presentation.SharedUI.DialogueMoodDriver
+  _dialogue: {fileID: 1802318521}
+  _character: {fileID: 816346113}
+  _moods: 080000000100000004000000i
 --- !u!1 &221014226
 GameObject:
   m_ObjectHideFlags: 0
@@ -4684,6 +4700,8 @@ MonoBehaviour:
   _tutorialTapArea: {fileID: 766022530}
   _tutorialText: {fileID: 1240958013}
   _tutorialFooter: {fileID: 185589489}
+  _settingsScreen: {fileID: 1622581088}
+  _settingsCloseButton: {fileID: 357964544}
   _hud: {fileID: 767113426}
   _hudStars: {fileID: 2035069675}
   _hudCoins: {fileID: 57399746}
@@ -4775,6 +4793,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 767113427}
+  - {fileID: 1622581086}
   - {fileID: 766022529}
   - {fileID: 742339314}
   - {fileID: 217763341}
@@ -4853,7 +4872,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4290702591
   m_fontColor: {r: 1, g: 0.9254902, b: 0.74509805, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -4866,7 +4885,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -4935,6 +4954,7 @@ GameObject:
   - component: {fileID: 303527558}
   - component: {fileID: 303527560}
   - component: {fileID: 303527559}
+  - component: {fileID: 303527561}
   m_Layer: 0
   m_Name: Elder
   m_TagString: Untagged
@@ -4999,6 +5019,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 303527557}
   m_CullTransparentMesh: 1
+--- !u!114 &303527561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303527557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58cd0052da6e345a19986b7801cec2a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoatGame.Presentation.SharedUI.CharacterExpressions
+  _renderer: {fileID: 0}
+  _image: {fileID: 303527559}
+  _frames:
+  - Mood: 0
+    Closed: {fileID: 21300000, guid: d00e8430892834d548f101a466e2ef43, type: 3}
+    Talk: {fileID: 21300000, guid: 9462935523b584e678c3c721053e7ec7, type: 3}
+  - Mood: 1
+    Closed: {fileID: 21300000, guid: 0b09fb76051554cbd830e450d316c8bb, type: 3}
+    Talk: {fileID: 21300000, guid: aa844b4fa861e4e6e82ae0836d27aecc, type: 3}
+  - Mood: 2
+    Closed: {fileID: 21300000, guid: 213e28b5e7c71452bbe82c1fb7d184f0, type: 3}
+    Talk: {fileID: 21300000, guid: 338aee080aa964658b02de2a294cc3f4, type: 3}
+  - Mood: 4
+    Closed: {fileID: 21300000, guid: 43ebed2d7f10543928bfa17d9012553e, type: 3}
+    Talk: {fileID: 21300000, guid: 8ce6ec68a8aa74bdf900d447972cce94, type: 3}
+  - Mood: 8
+    Closed: {fileID: 21300000, guid: 4781387c833524068b78493b779cbc28, type: 3}
+    Talk: {fileID: 21300000, guid: 3d3b85dae86164d40bcc72db36b5e997, type: 3}
+  _isVoiceDriven: 1
+  _breathAmount: 0.012
+  _breathSpeed: 2.2
+  _hopHeight: 0.35
 --- !u!1 &307627143
 GameObject:
   m_ObjectHideFlags: 0
@@ -5388,6 +5442,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 354680138}
   m_CullTransparentMesh: 1
+--- !u!114 &357964544 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4569227795008925205, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
+  m_PrefabInstance: {fileID: 1622581085}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0140eaf19e506844193441035b16e15e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEvent2Assembly::UnityEngine.UI.Button2
 --- !u!1001 &362054716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6294,9 +6359,17 @@ PrefabInstance:
     - target: {fileID: 7155622461661621138, guid: d87fa335ed31647399a01aeb17b377a3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1622581087}
+      objectReference: {fileID: 1065698213}
+    - target: {fileID: 7155622461661621138, guid: d87fa335ed31647399a01aeb17b377a3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1065698213}
     - target: {fileID: 7155622461661621138, guid: d87fa335ed31647399a01aeb17b377a3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7155622461661621138, guid: d87fa335ed31647399a01aeb17b377a3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7155622461661621138, guid: d87fa335ed31647399a01aeb17b377a3, type: 3}
@@ -6305,7 +6378,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7155622461661621138, guid: d87fa335ed31647399a01aeb17b377a3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: Open
+      value: Opensettings
+      objectReference: {fileID: 0}
+    - target: {fileID: 7155622461661621138, guid: d87fa335ed31647399a01aeb17b377a3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Opensettings
       objectReference: {fileID: 0}
     - target: {fileID: 7155622461661621138, guid: d87fa335ed31647399a01aeb17b377a3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Modes.Array.size
@@ -6316,7 +6393,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7155622461661621138, guid: d87fa335ed31647399a01aeb17b377a3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Modes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7155622461661621138, guid: d87fa335ed31647399a01aeb17b377a3, type: 3}
       propertyPath: 'm_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Modes.Array.data[0]'
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7155622461661621138, guid: d87fa335ed31647399a01aeb17b377a3, type: 3}
+      propertyPath: 'm_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Modes.Array.data[0]'
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7155622461661621138, guid: d87fa335ed31647399a01aeb17b377a3, type: 3}
@@ -10668,7 +10753,6 @@ RectTransform:
   - {fileID: 487868457}
   - {fileID: 873798567}
   - {fileID: 51279983}
-  - {fileID: 1622581086}
   - {fileID: 800860270}
   - {fileID: 1176999694}
   m_Father: {fileID: 293259777}
@@ -13378,6 +13462,7 @@ GameObject:
   - component: {fileID: 816346110}
   - component: {fileID: 816346112}
   - component: {fileID: 816346111}
+  - component: {fileID: 816346113}
   m_Layer: 0
   m_Name: Elder
   m_TagString: Untagged
@@ -13424,7 +13509,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 246fa81229d5701bd66663ef0f2129e1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d00e8430892834d548f101a466e2ef43, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -13442,6 +13527,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816346109}
   m_CullTransparentMesh: 1
+--- !u!114 &816346113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816346109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58cd0052da6e345a19986b7801cec2a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoatGame.Presentation.SharedUI.CharacterExpressions
+  _renderer: {fileID: 0}
+  _image: {fileID: 816346111}
+  _frames:
+  - Mood: 0
+    Closed: {fileID: 21300000, guid: d00e8430892834d548f101a466e2ef43, type: 3}
+    Talk: {fileID: 21300000, guid: 9462935523b584e678c3c721053e7ec7, type: 3}
+  - Mood: 1
+    Closed: {fileID: 21300000, guid: 0b09fb76051554cbd830e450d316c8bb, type: 3}
+    Talk: {fileID: 21300000, guid: aa844b4fa861e4e6e82ae0836d27aecc, type: 3}
+  - Mood: 2
+    Closed: {fileID: 21300000, guid: 213e28b5e7c71452bbe82c1fb7d184f0, type: 3}
+    Talk: {fileID: 21300000, guid: 338aee080aa964658b02de2a294cc3f4, type: 3}
+  - Mood: 4
+    Closed: {fileID: 21300000, guid: 43ebed2d7f10543928bfa17d9012553e, type: 3}
+    Talk: {fileID: 21300000, guid: 8ce6ec68a8aa74bdf900d447972cce94, type: 3}
+  - Mood: 8
+    Closed: {fileID: 21300000, guid: 4781387c833524068b78493b779cbc28, type: 3}
+    Talk: {fileID: 21300000, guid: 3d3b85dae86164d40bcc72db36b5e997, type: 3}
+  _isVoiceDriven: 1
+  _breathAmount: 0.012
+  _breathSpeed: 2.2
+  _hopHeight: 0.35
 --- !u!1001 &824706006
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15538,6 +15657,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1111210116}
+  - component: {fileID: 1111210117}
   m_Layer: 0
   m_Name: ArrivalScreen
   m_TagString: Untagged
@@ -15569,6 +15689,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1111210117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111210115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a45f7900b76548aaa69704d9acbf797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoatGame.Presentation.SharedUI.DialogueMoodDriver
+  _dialogue: {fileID: 1269227047}
+  _character: {fileID: 303527561}
+  _moods: 0200000004000000i
 --- !u!1001 &1114192664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16472,7 +16607,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -17644,7 +17779,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1304418084}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 766022528}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1001 &1306113362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18235,7 +18382,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4289391871
   m_fontColor: {r: 1, g: 0.9254902, b: 0.6666667, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -18248,7 +18395,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -19208,7 +19355,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4280834700
   m_fontColor: {r: 0.54901963, g: 0.3529412, b: 0.15686275, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -19221,7 +19368,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -24767,7 +24914,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 767113427}
+    m_TransformParent: {fileID: 293259777}
     m_Modifications:
     - target: {fileID: 119249917567344798, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
       propertyPath: m_AnchorMax.y
@@ -24987,15 +25134,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4107052970201388767, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4107052970201388767, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4107052970201388767, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4107052970201388767, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -25016,6 +25163,54 @@ PrefabInstance:
     - target: {fileID: 4107052970201388767, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569227795008925205, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
+      propertyPath: m_Transition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569227795008925205, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569227795008925205, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 293259773}
+    - target: {fileID: 4569227795008925205, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 293259773}
+    - target: {fileID: 4569227795008925205, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569227795008925205, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569227795008925205, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnButtonClick_TutorialTap
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569227795008925205, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnButtonClick_TutorialTap
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569227795008925205, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Modes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569227795008925205, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Modes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569227795008925205, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
+      propertyPath: 'm_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Modes.Array.data[0]'
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569227795008925205, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
+      propertyPath: 'm_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Modes.Array.data[0]'
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5203861006526640806, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
       propertyPath: m_AnchorMax.x
@@ -25135,17 +25330,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4107052970201388767, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
   m_PrefabInstance: {fileID: 1622581085}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1622581087 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2736572800312965651, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
-  m_PrefabInstance: {fileID: 1622581085}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1622581088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a232c5c1db8a46afb90e09530c46d46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BoatGame.Presentation.SharedUI.OptionsPanel
 --- !u!1 &1622581088 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 830945907863499143, guid: 8fb88503f775e4e4dbf7f20d9bde48cc, type: 3}
@@ -25348,7 +25532,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
