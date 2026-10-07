@@ -15,6 +15,9 @@ using UnityEngine.UI;
 /// </summary>
 public sealed class NilometerUI : MonoBehaviour
 {
+    private static readonly Color CorrectTickColor = new Color32(0xFF, 0x8C, 0x00, 0xFF);
+    private static readonly Color DefaultTickColor = new Color32(0x4A, 0x2A, 0x10, 0xFF);
+
     [Serializable]
     public sealed class AnswerSubmittedEvent : UnityEvent2<int, int, bool> { }
 
@@ -63,6 +66,8 @@ public sealed class NilometerUI : MonoBehaviour
     [SerializeField] private Button2 _hintButton;
     [SerializeField, Min(0f), Tooltip("Seconds after the water-rise voice begins before the water animation starts.")]
     private float _waterAnimationDelayAfterVoiceStarts = 1f;
+    [SerializeField, Min(0f), Tooltip("Seconds the selected correct answer remains highlighted before its question closes.")]
+    private float _correctAnswerFeedbackDuration = 3f;
 
     [Header("Characters")]
     [SerializeField] private PlayerAvatarSelector _playerAvatarSelector;
@@ -88,6 +93,7 @@ public sealed class NilometerUI : MonoBehaviour
     private PendingDialogue _pendingDialogue;
     private CharacterMood[] _activeElderMoods;
     private CharacterExpressions _traveler;
+    private Coroutine _correctAnswerFeedbackRoutine;
 
     private void Awake()
     {
@@ -195,18 +201,18 @@ public sealed class NilometerUI : MonoBehaviour
 
         if (isCorrect)
         {
+            EventBus.Publish(new PlaySfxEvent(SfxId.Correct));
             _traveler?.SetMood(CharacterMood.Happy);
             _traveler?.PlayHop();
             _elder?.SetMood(CharacterMood.Happy);
-            PlaySingleLine(SelectCorrectLine(_waterOperator.GetCorrectDialogueLineIndex(levelIndex)), CharacterMood.Happy,
-                levelIndex + 1 < _waterOperator.LevelCount ? PendingDialogue.MoveToNextLevel : PendingDialogue.StartLesson);
+            _correctAnswerFeedbackRoutine = StartCoroutine(ShowCorrectAnswerFeedback(levelIndex, answerIndex));
             return;
         }
 
         _attemptsForLevel++;
         _starsRemaining = Mathf.Max(0, _starsRemaining - 1);
         _starsDisplay?.ShowStars(_starsRemaining, true);
-        EventBus.Publish(new PlaySfxEvent(SfxId.StarLost));
+        EventBus.Publish(new PlaySfxEvent(SfxId.Wrong));
         SetButtonInteractable(levelIndex, answerIndex, false);
 
         if (_attemptsForLevel < 2)
@@ -366,7 +372,10 @@ public sealed class NilometerUI : MonoBehaviour
         if (_waterOperator == null || _waterOperator.MoveToLevel(levelIndex) == false)
         {
             Debug.LogWarning("NilometerUI could not animate the requested water level.", this);
+            return;
         }
+
+        EventBus.Publish(new PlaySfxEvent(SfxId.WaterRise));
     }
 
     private IEnumerator StartWaterMoveAfterVoiceDelay()
@@ -381,6 +390,24 @@ public sealed class NilometerUI : MonoBehaviour
         {
             MoveWaterToPendingLevel();
         }
+    }
+
+    private IEnumerator ShowCorrectAnswerFeedback(int levelIndex, int answerIndex)
+    {
+        Button2 correctButton = GetAnswerButton(levelIndex, answerIndex);
+        SetCorrectAnswerVisual(correctButton, true);
+
+        if (_correctAnswerFeedbackDuration > 0f)
+        {
+            yield return new WaitForSeconds(_correctAnswerFeedbackDuration);
+        }
+
+        SetCorrectAnswerVisual(correctButton, false);
+        ShowOnlyPanel(-1);
+        _correctAnswerFeedbackRoutine = null;
+
+        PlaySingleLine(SelectCorrectLine(_waterOperator.GetCorrectDialogueLineIndex(levelIndex)), CharacterMood.Happy,
+            levelIndex + 1 < _waterOperator.LevelCount ? PendingDialogue.MoveToNextLevel : PendingDialogue.StartLesson);
     }
 
     private void SelectTravelerFromAvatarSelector()
@@ -497,6 +524,40 @@ public sealed class NilometerUI : MonoBehaviour
         for (int i = 0; i < buttons.Length; i++)
         {
             _disabledAnswers.Remove(buttons[i]);
+            SetCorrectAnswerVisual(buttons[i], false);
+        }
+    }
+
+    private Button2 GetAnswerButton(int levelIndex, int answerIndex)
+    {
+        if (levelIndex < 0 || levelIndex >= _questionPanels.Length)
+        {
+            return null;
+        }
+
+        Button2[] buttons = _questionPanels[levelIndex].GetComponentsInChildren<Button2>(true);
+        return answerIndex >= 0 && answerIndex < buttons.Length ? buttons[answerIndex] : null;
+    }
+
+    private static void SetCorrectAnswerVisual(Button2 button, bool isCorrect)
+    {
+        if (button == null || button.transform.parent == null)
+        {
+            return;
+        }
+
+        Transform answerNumber = button.transform.parent;
+        SpriteRenderer tick = answerNumber.Find("tick")?.GetComponent<SpriteRenderer>();
+        GameObject glow = answerNumber.Find("Glow")?.gameObject;
+
+        if (tick != null)
+        {
+            tick.color = isCorrect ? CorrectTickColor : DefaultTickColor;
+        }
+
+        if (glow != null)
+        {
+            glow.SetActive(isCorrect);
         }
     }
 

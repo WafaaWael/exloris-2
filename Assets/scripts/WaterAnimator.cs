@@ -10,6 +10,7 @@ public sealed class WaterAnimator : MonoBehaviour
 
     private Tween _waterTween;
 
+
     public void AnimateYSize(float targetY, Action onComplete = null, float duration = 1f)
     {
         if (_water2D == null)
@@ -29,7 +30,7 @@ public sealed class WaterAnimator : MonoBehaviour
             .SetEase(Ease.InOutSine)
             .OnComplete(() => onComplete?.Invoke());
     }
-
+    
     private void OnDestroy()
     {
         _waterTween?.Kill();
