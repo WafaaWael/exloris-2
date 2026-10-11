@@ -1,0 +1,14 @@
+flowchart TD
+    Start[Intro dialogue] --> RisePrompt[Water-rise prompt]
+    RisePrompt --> Move[WaterOperator moves water]
+    Move --> Question[Show question Tail]
+    Question --> Answer{Answer correct?}
+    Answer -->|Yes| Correct[Correct feedback and dialogue]
+    Answer -->|No, first miss| Almost[Remove star, disable answer, hint / retry]
+    Almost --> Question
+    Answer -->|No, second miss| Explain[Remove star and explanation]
+    Correct --> More{More levels?}
+    Explain --> More
+    More -->|Yes| RisePrompt
+    More -->|No| Lesson[Lesson and cubit card]
+    Lesson --> Complete[Completion display]

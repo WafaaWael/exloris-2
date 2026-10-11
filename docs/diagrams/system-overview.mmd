@@ -1,0 +1,16 @@
+flowchart TB
+    Player[Player] --> Scenes[Unity scenes]
+    Scenes --> UI[Presentation: BoatLevelUI / SharedUI]
+    UI --> Flow[Gameplay flow: BoatLevelFlow / NilometerUI]
+    Flow --> Gameplay[Gameplay actors: BoatController / BoatInput / Coin / Obstacle]
+    Gameplay --> Flow
+    Flow --> Bus[Typed EventBus]
+    UI --> Bus
+    Data[Core data: settings, dialogue, events] --> Bus
+    Bus --> Audio[AudioService]
+    Bus --> Vfx[BoatLevelVfx]
+    Flow --> Persist[SaveSystem + PlayerPrefs]
+    UI --> Persist
+    Content[Unity assets: localization, audio, sprites, prefabs] --> UI
+    Content --> Gameplay
+    Content --> Audio

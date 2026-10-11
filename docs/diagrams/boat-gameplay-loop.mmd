@@ -1,0 +1,11 @@
+flowchart TD
+    Input[Keyboard, swipe, or tap] --> Lane[BoatInput emits lane step]
+    Lane --> Move[BoatController changes lane]
+    Move --> Trigger{Trigger overlap?}
+    Trigger -->|Coin| Coin[Coin collect animation]
+    Coin --> CoinEvent[CoinCollectedEvent + coin SFX]
+    Trigger -->|Obstacle| Hit[Boat pushes back / blocks lane]
+    Hit --> HitEvent[BoatHitObstacleEvent + bump SFX]
+    CoinEvent --> Feedback[HUD, VFX, audio update]
+    HitEvent --> Feedback
+    Feedback --> Input
