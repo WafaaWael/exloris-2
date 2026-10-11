@@ -1,0 +1,9 @@
+{
+    "name": "BoatGame.CoreGameSystems.Audio",
+    "rootNamespace": "BoatGame.CoreGameSystems.Audio",
+    "references": [
+        "BoatGame.CoreData",
+        "BoatGame.CoreData.Messaging"
+    ],
+    "autoReferenced": true
+}

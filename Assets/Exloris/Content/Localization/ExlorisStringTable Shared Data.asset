@@ -51,6 +51,22 @@ MonoBehaviour:
     m_Key: foundation.intro.caption.vo_intro_001
     m_Metadata:
       m_Items: []
+  - m_Id: 7251240923684864
+    m_Key: Explorer School
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7261288655740928
+    m_Key: Welcome to exlorise school
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7261541496774656
+    m_Key: Choose School to explore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8661873485406208
+    m_Key: Measuring the Nile
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

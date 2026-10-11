@@ -1,0 +1,13 @@
+flowchart TD
+    Intro[Intro dialogue] --> Tutorial[Tutorial overlay]
+    Tutorial -->|Tap start| Playing[Playing]
+    Playing -->|Help| Paused[Paused/tutorial overlay]
+    Paused -->|Tap continue| Playing
+    Playing -->|Settings| Settings[Settings]
+    Settings -->|Close| Playing
+    Playing -->|Near dock| Arriving[Autopilot arriving]
+    Arriving -->|Dock reached| Arrived[Arrival dialogue]
+    Arrived -->|Dialogue complete| Complete[Completion card]
+    Complete -->|Replay| Replay[Reload current scene]
+    Complete -->|Next| Next[Load configured next scene]
+    Replay --> Intro

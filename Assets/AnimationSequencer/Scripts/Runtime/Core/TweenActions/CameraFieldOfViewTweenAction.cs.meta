@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4f3f2df2dbccded4da41cbd9b980dda2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310926
+  packageName: "Animation Sequencer \u2013 Visual Tween & Chain Editor"
+  packageVersion: 2.0.0
+  assetPath: Assets/AnimationSequencer/Scripts/Runtime/Core/TweenActions/CameraFieldOfViewTweenAction.cs
+  uploadId: 736265

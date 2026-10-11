@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!612988286 &1
+SpriteAtlasAsset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Atlas_Nilometer
+  serializedVersion: 2
+  m_MasterAtlas: {fileID: 0}
+  m_ImporterData:
+    packables:
+    - {fileID: 2800000, guid: 70a10000000000000000000000000001, type: 3}
+    - {fileID: 2800000, guid: 4a49a5479fbaa4d93b37378d3abb8694, type: 3}
+    - {fileID: 2800000, guid: 22634f067ad354388b387484c2986e5d, type: 3}
+    - {fileID: 2800000, guid: 1a9b9ed7ee1864f8a9f9197dac47217d, type: 3}
+    - {fileID: 2800000, guid: d53cca3a645634f1a8c75a40f45f4e04, type: 3}
+    - {fileID: 2800000, guid: 6eec627aa354541b29cf708452b37adf, type: 3}
+    - {fileID: 2800000, guid: fe51d61153d2849bcba8ed99d2b649e5, type: 3}
+    - {fileID: 2800000, guid: 7a003fb7f31c74ebe824b7bcc6d7b3c3, type: 3}
+    - {fileID: 2800000, guid: 739466aa5c069445f917b3d69b7939e5, type: 3}
+    - {fileID: 2800000, guid: 79ef8f29f35154f72ab4f7bbca5aedea, type: 3}
+    - {fileID: 2800000, guid: ba07dd7e2dabb444d93512ea449ea5eb, type: 3}
+    - {fileID: 2800000, guid: 83a46f232a0d9498e8748ee08bd484a2, type: 3}
+    - {fileID: 2800000, guid: 9184649d3326a471184563a9c5b8dbce, type: 3}
+    - {fileID: 2800000, guid: e52cb4efac805c542a4325c5ca88ba07, type: 3}
+    - {fileID: 2800000, guid: 8cfe79e70616a4d75b6288b5f28f036d, type: 3}
+    - {fileID: 2800000, guid: 7927c2e2c50da4219bdd533f197d0c46, type: 3}
+    - {fileID: 2800000, guid: e60fc001f164145e59b9156a16205971, type: 3}
+    - {fileID: 2800000, guid: 46e8c4d1a0a5f4bf3b21ef604ac3c93e, type: 3}
+    - {fileID: 2800000, guid: f5b855852ff9546b4978a4d35640bdbe, type: 3}
+    - {fileID: 2800000, guid: 866804f30d5e644f59a8eacf8eb9d51d, type: 3}
+    - {fileID: 2800000, guid: 29617c607f1a14d38bfab3e64ab04f2f, type: 3}
+    - {fileID: 2800000, guid: f99c530986a35451e977286ae5594cb3, type: 3}
+  m_IsVariant: 0

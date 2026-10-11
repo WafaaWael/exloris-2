@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2c5d3b89229664737a7a932419b9186c
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310926
+  packageName: "Animation Sequencer \u2013 Visual Tween & Chain Editor"
+  packageVersion: 2.0.0
+  assetPath: Assets/AnimationSequencer/Scripts/Editor/BrunoMikoski.AnimationSequencer.Editor.asmdef
+  uploadId: 736265

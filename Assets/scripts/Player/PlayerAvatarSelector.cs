@@ -7,7 +7,7 @@ public class PlayerAvatarSelector : MonoBehaviour
 
     private void Start()
     {
-      //  ApplyGender(Exloris.Saving.SaveManager.Instance.CurrentData?.gender ?? PlayerGender.NotSelected);
+        ApplyGender(Exloris.Saving.SaveManager.Instance.CurrentData?.gender ?? PlayerGender.NotSelected);
     }
 
     public void ApplyGender(PlayerGender gender)
@@ -32,6 +32,21 @@ public class PlayerAvatarSelector : MonoBehaviour
                 boyAvatar.SetActive(true);
                 girlAvatar.SetActive(false);
                 break;
+        }
+    }
+    public PlayerGender GetCurrentGender()
+    {
+        if (boyAvatar.activeSelf)
+        {
+            return PlayerGender.Male;
+        }
+        else if (girlAvatar.activeSelf)
+        {
+            return PlayerGender.Female;
+        }
+        else
+        {
+            return PlayerGender.NotSelected;
         }
     }
 }

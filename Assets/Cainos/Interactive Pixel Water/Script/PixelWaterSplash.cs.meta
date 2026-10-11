@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 06bc61e47db65354ead5ec556a0e9226
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346638
+  packageName: Interactive Pixel Water
+  packageVersion: 1.0.5
+  assetPath: Assets/Cainos/Interactive Pixel Water/Script/PixelWaterSplash.cs
+  uploadId: 1000192

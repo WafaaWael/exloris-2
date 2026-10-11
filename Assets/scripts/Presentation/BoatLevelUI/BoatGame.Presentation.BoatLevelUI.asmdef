@@ -1,0 +1,14 @@
+{
+    "name": "BoatGame.Presentation.BoatLevelUI",
+    "rootNamespace": "BoatGame.Presentation.BoatLevelUI",
+    "references": [
+        "BoatGame.CoreData",
+        "BoatGame.GameplaySystems.BoatLevel",
+        "BoatGame.CoreData.Messaging",
+        "Unity.InputSystem",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI",
+        "UnityEvent2Assembly"
+    ],
+    "autoReferenced": true
+}

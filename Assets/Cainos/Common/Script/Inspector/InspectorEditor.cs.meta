@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 9fe04a105976442fb69398dec78bdc76
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346638
+  packageName: Interactive Pixel Water
+  packageVersion: 1.0.5
+  assetPath: Assets/Cainos/Common/Script/Inspector/InspectorEditor.cs
+  uploadId: 1000192

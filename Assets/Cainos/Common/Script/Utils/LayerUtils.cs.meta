@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 6a868c3afca9ee74eac8c7546c2d1808
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346638
+  packageName: Interactive Pixel Water
+  packageVersion: 1.0.5
+  assetPath: Assets/Cainos/Common/Script/Utils/LayerUtils.cs
+  uploadId: 1000192

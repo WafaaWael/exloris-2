@@ -1,0 +1,20 @@
+﻿Interactive Pixel Water
+
+1.0.5
+	- Editor scripts simplified.
+
+1.0.4
+	- Add Unity 6.5 support.
+
+1.0.3
+	- Add URP 2D lighting support for Unity 6.4.
+
+1.0.2
+	- Add inspector tooltips.
+	- Update included [Lucid Editor] to 1.1.0.
+
+1.0.1
+	- Some minor bugs fixed.
+
+1.0.0
+	- First Release.

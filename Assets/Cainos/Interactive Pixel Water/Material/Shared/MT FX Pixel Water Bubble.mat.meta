@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ea4c7e055eafcef4cbf7784601f2ef4e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346638
+  packageName: Interactive Pixel Water
+  packageVersion: 1.0.5
+  assetPath: Assets/Cainos/Interactive Pixel Water/Material/Shared/MT FX Pixel Water Bubble.mat
+  uploadId: 1000192

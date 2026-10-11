@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: b2b1a10cd68a4efabd7bb93238c0e83c
+timeCreated: 1614541462
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310926
+  packageName: "Animation Sequencer \u2013 Visual Tween & Chain Editor"
+  packageVersion: 2.0.0
+  assetPath: Assets/AnimationSequencer/Scripts/Editor/Core/CustomEase/CustomEasePropertyDrawer.cs
+  uploadId: 736265

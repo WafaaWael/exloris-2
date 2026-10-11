@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 93916c829e0d1224bae8e6c049133184
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346638
+  packageName: Interactive Pixel Water
+  packageVersion: 1.0.5
+  assetPath: Assets/Cainos/Interactive Pixel Water/Script/Demo/CameraMove.cs
+  uploadId: 1000192

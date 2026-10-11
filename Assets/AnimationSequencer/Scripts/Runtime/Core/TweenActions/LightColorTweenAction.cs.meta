@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: dee8376bcc5314e44b950397846879e3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310926
+  packageName: "Animation Sequencer \u2013 Visual Tween & Chain Editor"
+  packageVersion: 2.0.0
+  assetPath: Assets/AnimationSequencer/Scripts/Runtime/Core/TweenActions/LightColorTweenAction.cs
+  uploadId: 736265

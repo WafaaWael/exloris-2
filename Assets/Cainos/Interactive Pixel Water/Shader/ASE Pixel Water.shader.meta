@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: fb2bece584ef8de46908093f3ebc0a23
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346638
+  packageName: Interactive Pixel Water
+  packageVersion: 1.0.5
+  assetPath: Assets/Cainos/Interactive Pixel Water/Shader/ASE Pixel Water.shader
+  uploadId: 1000192

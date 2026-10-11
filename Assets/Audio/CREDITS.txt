@@ -1,0 +1,12 @@
+Music and ambience from Pixabay (Pixabay Content License: free for commercial use, no attribution required).
+Originals kept in ArtSource/PixabayAudio; the .wav files here are trimmed, crossfaded loop versions.
+
+- Music/music_gameplay_loop.wav  <- "Arabian Gold Warm Instrumental" by GoldenSoundLabs
+  https://pixabay.com/music/upbeat-arabian-gold-warm-instrumental-490119/
+- Music/music_victory_loop.wav   <- "Arabian Gold Cheerful Instrumental" by GoldenSoundLabs
+  https://pixabay.com/music/arabic-arabian-gold-cheerful-instrumental-490117/
+- Ambience/amb_river_loop.wav    <- "Calm River Ambience | Loop" by SoundsForYou (+8 dB)
+  https://pixabay.com/sound-effects/nature-calm-river-ambience-loop-125071/
+
+Fonts: Fredoka (SIL Open Font License, see Art/Fonts/OFL.txt).
+Placeholder SFX in Audio/SFX are synthesized (ArtSource/make_sfx.py).

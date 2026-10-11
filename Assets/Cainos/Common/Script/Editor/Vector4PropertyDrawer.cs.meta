@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 392668fb96b08bf4ea568e9fe810b3eb
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346638
+  packageName: Interactive Pixel Water
+  packageVersion: 1.0.5
+  assetPath: Assets/Cainos/Common/Script/Editor/Vector4PropertyDrawer.cs
+  uploadId: 1000192
