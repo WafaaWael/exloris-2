@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 8d273bf1b3a91cd41a715879e42d2665
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _MainTex: {fileID: 2800000, guid: ce74f89f06bd78c42a7434a2bcfdd484, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346638
+  packageName: Interactive Pixel Water
+  packageVersion: 1.0.5
+  assetPath: Assets/Cainos/Interactive Pixel Water/Shader/ASE Pixel Water Spark.shader
+  uploadId: 1000192

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 6167f02b3d31f3e4f8e87b6f2f12307b
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _MainTex: {fileID: 2800000, guid: e44ad4a182c721e438e64ec6249c3825, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346638
+  packageName: Interactive Pixel Water
+  packageVersion: 1.0.5
+  assetPath: Assets/Cainos/Interactive Pixel Water/Shader/ASE Pixel Water In Water Particle.shader
+  uploadId: 1000192
