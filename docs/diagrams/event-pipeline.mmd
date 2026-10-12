@@ -1,0 +1,17 @@
+flowchart LR
+    Input[Boat input / collisions / UI] --> Flow[BoatLevelFlow]
+    Flow --> State[LevelStateChangedEvent]
+    Flow --> Progress[LevelProgressEvent]
+    Flow --> Score[CoinCollectedEvent / BoatHitObstacleEvent]
+    Flow --> Sound[PlaySfxEvent]
+    Nilometer[NilometerUI] --> Sound
+    UI[BoatLevelUI / OptionsPanel] --> Sound
+    State --> Bus[Typed EventBus]
+    Progress --> Bus
+    Score --> Bus
+    Sound --> Bus
+    Bus --> BoatUi[BoatLevelUI]
+    Bus --> Audio[AudioService]
+    Bus --> Vfx[BoatLevelVfx]
+    Audio --> Voice[VoiceActivityEvent]
+    Voice --> Expressions[CharacterExpressions]

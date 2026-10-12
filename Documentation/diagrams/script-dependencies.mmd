@@ -1,0 +1,26 @@
+flowchart LR
+    subgraph BoatFeature[Boat level direct dependencies]
+      Input[BoatInput] -->|OnLaneStep| Flow[BoatLevelFlow]
+      Flow -->|StepLane / progress / autopilot| Boat[BoatController]
+      Boat -->|coin / obstacle delegates| Flow
+      Flow -->|Service resolver| UI[BoatLevelUI]
+    end
+    subgraph EventConsumers[Typed event consumers]
+      Flow --> Bus[EventBus]
+      Boat --> Bus
+      UI --> Bus
+      Bus --> Audio[AudioService]
+      Bus --> VFX[BoatLevelVfx]
+      Audio --> Expressions[CharacterExpressions]
+    end
+    subgraph NileFeature[Nilometer direct dependencies]
+      Nile[NilometerUI] --> Water[WaterOperator]
+      Water --> Animator[WaterAnimator]
+      Nile --> Dialogue[Shared DialoguePanel]
+      Nile --> Tail[Tail answer panels]
+    end
+    subgraph Saving[Player persistence]
+      Player[player] --> Manager[SaveManager]
+      Manager --> Save[SaveSystem]
+      Save --> Secret[SaveSecrets key provider]
+    end

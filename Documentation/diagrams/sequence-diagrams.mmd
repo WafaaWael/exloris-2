@@ -1,0 +1,62 @@
+sequenceDiagram
+    participant User
+    participant Input as BoatInput
+    participant Boat as BoatController
+    participant Flow as BoatLevelFlow
+    participant Bus as EventBus
+    participant UI as BoatLevelUI
+    participant VFX as BoatLevelVfx
+    participant Audio as AudioService
+    User->>Input: keyboard / swipe / tap
+    Input->>Flow: OnLaneStep(direction)
+    Flow->>Boat: StepLane(direction)
+    Boat->>Flow: OnObstacleHit(obstacle, isFirstHit)
+    Flow->>Bus: PlaySfxEvent(Bump)
+    opt eligible hit and stars remain
+        Flow->>Flow: decrement star
+        Flow->>Bus: PlaySfxEvent(StarLost)
+    end
+    Flow->>Bus: BoatHitObstacleEvent(stars, contact)
+    Bus-->>UI: update HUD stars
+    Bus-->>VFX: impact response
+    Bus-->>Audio: play SFX
+
+    rect rgb(238, 246, 255)
+        participant User2 as User
+        participant Question as Tail button
+        participant Nile as NilometerUI
+        participant Water as WaterOperator
+        participant Dialogue as Shared DialoguePanel
+        User2->>Question: select answer
+        Question->>Nile: SubmitAnswer(level, answer)
+        Nile->>Water: IsCorrectAnswer(level, answer)
+        alt correct
+            Nile->>Nile: feedback and continue flow
+        else wrong first attempt
+            Nile->>Dialogue: play almost line
+            Dialogue-->>Nile: finished; resume question
+        else wrong second attempt
+            Nile->>Dialogue: play sorry line
+            Dialogue-->>Nile: finished; next level or lesson
+        end
+    end
+
+    rect rgb(244, 255, 244)
+        participant Player as player
+        participant Manager as SaveManager
+        participant System as SaveSystem
+        participant File as player.save
+        Player->>Manager: register / save
+        Manager->>System: SavePlayer(player)
+        System->>System: serialize, encrypt, HMAC, Base64
+        System->>File: write
+        Manager->>System: LoadPlayer()
+        System->>File: read
+        System->>System: verify header and HMAC
+        alt valid
+            System->>System: decrypt / deserialize
+            System-->>Manager: PlayerData
+        else invalid
+            System-->>Manager: null and log error
+        end
+    end

@@ -1,0 +1,13 @@
+flowchart TD
+    Start[Open main menu scene] --> Menu[main menu]
+    Menu --> Player[player]
+    Player --> Map[Map]
+    Map --> Boat[boat/BoatLevel]
+    Boat --> Nilometer[NiloMeter/NiloMeter]
+    Boat --> Replay[ReplayLevel reloads active scene]
+    Boat --> Next{Completion Next enabled?}
+    Next -->|Current UI handler| Disabled[No scene load: LoadNextSection is commented out]
+    Next -->|If enabled| Configured[Load _nextSceneName]
+    Configured --> Check{Scene is in build settings?}
+    Check -->|Yes| Destination[Load destination]
+    Check -->|No| Error[Unity scene-load error]

@@ -1,0 +1,18 @@
+flowchart TB
+    Scenes[Scenes and prefabs] --> Menu[Menu / player / map]
+    Scenes --> BoatScene[BoatLevel]
+    Scenes --> NileScene[Nilometer]
+    Menu --> Navigation[SceneManager / serialized UI callbacks]
+    Menu --> Player[Avatar selection / SaveManager]
+    BoatScene --> Flow[BoatLevelFlow]
+    Flow --> Actors[BoatInput / BoatController / Coin / Obstacle]
+    Flow --> Bus[Typed EventBus]
+    UI[BoatLevelUI] --> Flow
+    UI --> Bus
+    Bus --> Audio[AudioService]
+    Bus --> VFX[BoatLevelVfx]
+    NileScene --> Quiz[NilometerUI]
+    Quiz --> Water[WaterOperator / WaterAnimator]
+    Quiz --> Dialogue[Shared DialoguePanel]
+    Dialogue --> Bus
+    Player --> Save[SaveSystem]

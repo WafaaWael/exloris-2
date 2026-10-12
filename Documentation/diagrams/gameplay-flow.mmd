@@ -1,0 +1,23 @@
+flowchart TD
+    Intro[Intro dialogue] --> Tutorial[Tutorial]
+    Tutorial -->|Start| Playing[Playing: enable boat and input]
+    Playing --> Read[Read keyboard or pointer input]
+    Read --> Lane[Emit lane step]
+    Lane --> Move[BoatController moves within 3 lanes]
+    Move --> Collision{Trigger contact?}
+    Collision -->|None| Progress[Flow updates progress / speed]
+    Collision -->|Coin| Coin[Collect once; increment count]
+    Coin --> CoinEvents[Coin event and SFX]
+    Collision -->|Obstacle| Hit[Pushback / block or bounce]
+    Hit --> HitEvents[Update stars when eligible; publish hit event]
+    CoinEvents --> Feedback[HUD / VFX / audio listeners]
+    HitEvents --> Feedback
+    Progress --> Dock{Near dock?}
+    Feedback --> Dock
+    Dock -->|No| Read
+    Dock -->|Yes| Arrival[Disable input and start autopilot]
+    Arrival --> Arrived[Dock stop, delay, arrival dialogue]
+    Arrived --> Complete[Completion card]
+    Complete --> Replay[Replay reloads current build scene]
+    Complete --> Next[Current UI Next handler only plays tap SFX]
+    Stars[Stars reach zero] -.-> NoFail[No explicit failure state was identified]

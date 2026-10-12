@@ -1,0 +1,60 @@
+classDiagram
+    class IEvent {
+        <<interface>>
+    }
+    class EventBus {
+        <<static>>
+        +Subscribe~T~(callback)
+        +Unsubscribe~T~(callback)
+        +Publish~T~(event)
+    }
+    class LevelStateChangedEvent {
+        <<struct>>
+        +LevelState Previous
+        +LevelState Current
+    }
+    class BoatLevelFlow {
+        +LevelState State
+        +int Stars
+        +int Coins
+        +StartPlaying()
+        +ReplayLevel()
+        +LoadNextSection()
+    }
+    class BoatController {
+        +StepLane(direction)
+        +SetProgress(progress01)
+        +StartAutoPilot(stopY)
+    }
+    class BoatInput {
+        +bool IsInputEnabled
+        +event OnLaneStep
+    }
+    class NilometerUI {
+        +SubmitAnswer(levelIndex, answerIndex)
+        +OnButtonClick_Hint()
+    }
+    class WaterOperator {
+        +MoveToLevel(levelIndex)
+        +IsCorrectAnswer(levelIndex, answerIndex)
+    }
+    class player {
+        +SetGender(gender)
+    }
+    class SaveManager {
+        +SaveCurrentPlayer()
+        +LoadCurrentPlayer()
+    }
+    class SaveSystem {
+        <<static>>
+        +SavePlayer(player)
+        +LoadPlayer() PlayerData
+    }
+    LevelStateChangedEvent ..|> IEvent
+    BoatLevelFlow --> BoatController
+    BoatLevelFlow --> BoatInput
+    BoatLevelFlow ..> EventBus
+    BoatController ..> EventBus
+    NilometerUI --> WaterOperator
+    player --> SaveManager
+    SaveManager --> SaveSystem

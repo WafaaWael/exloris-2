@@ -1,0 +1,18 @@
+flowchart TB
+    Scene[Scenes / serialized references] --> Flow[BoatLevelFlow]
+    Input[BoatInput] -->|lane step callback| Flow
+    Flow -->|direct calls| Boat[BoatController]
+    Boat -->|collision callbacks| Flow
+    Flow --> Bus[EventBus]
+    Boat --> Bus
+    BoatUI[BoatLevelUI] -->|flow methods via Service| Flow
+    BoatUI <--> Bus
+    Bus --> Audio[AudioService]
+    Bus --> VFX[BoatLevelVfx]
+    Bus --> Voice[VoiceActivityEvent]
+    Voice --> Character[CharacterExpressions]
+    Nile[NilometerUI] --> Water[WaterOperator / WaterAnimator]
+    Nile --> Dialogue[Shared DialoguePanel]
+    Player[Player / avatar selection] --> SaveManager[SaveManager]
+    SaveManager --> SaveSystem[SaveSystem]
+    SaveSystem --> File[player.save]

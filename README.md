@@ -15,9 +15,12 @@ Exloris 2 is a Unity educational game about ancient Egypt. Its enabled build con
 
 ## Documentation
 
+- [Documentation index](docs/README.md) — complete navigation for the project reference.
 - [Architecture](docs/architecture.md) — runtime layers, services, assets, and current boundaries.
 - [Scene and feature reference](docs/scene-reference.md) — build order, scene responsibilities, and script ownership.
 - [Gameplay flows](docs/gameplay-flows.md) — rendered Mermaid diagrams and player journeys.
+- [Script reference](docs/script-reference.md) — project-owned runtime scripts, responsibilities, and integration notes.
+- [Integration and configuration](docs/integration-and-configuration.md) — scene setup, Nilometer levels, audio, localization, persistence, and typed events.
 - [Flowchart sources](docs/diagrams/) — standalone Mermaid (`.mmd`) scripts.
 - [Event and data reference](docs/events-and-data.md) — typed events, persistence, localization, and contracts.
 - [Development guide](docs/development.md) — setup, validation, testing, builds, and conventions.

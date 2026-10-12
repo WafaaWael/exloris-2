@@ -1,0 +1,16 @@
+flowchart TD
+    Player[player component] --> Manager[SaveManager]
+    Manager --> Save[SaveSystem.SavePlayer]
+    Save --> Json[JsonUtility serializes PlayerData]
+    Json --> Encrypt[AES-CBC encryption with random IV]
+    Encrypt --> Sign[HMAC-SHA256 over IV + ciphertext]
+    Sign --> Encode[Build EX2S envelope and Base64 encode]
+    Encode --> File[player.save in persistentDataPath]
+    File --> Read[LoadPlayer reads Base64 text]
+    Read --> Header{EX2S header valid?}
+    Header -->|No| Fail[Log failure and return null]
+    Header -->|Yes| Verify{HMAC valid?}
+    Verify -->|No| Fail
+    Verify -->|Yes| Decrypt[AES-CBC decrypt]
+    Decrypt --> Deserialize[JsonUtility deserializes PlayerData]
+    Deserialize --> Manager

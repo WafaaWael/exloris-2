@@ -1,0 +1,12 @@
+flowchart LR
+    Menu[main menu] --> Player[player]
+    Player --> Map[Map]
+    Map --> Boat[boat/BoatLevel]
+    Boat --> Nile[NiloMeter/NiloMeter]
+    Boat --> Replay[Reload active scene]
+    Boat --> NextHandler[Completion Next button]
+    NextHandler -->|Current code| NoLoad[Does not invoke LoadNextSection]
+    FlowNext[BoatLevelFlow.LoadNextSection] --> Name[Load configured _nextSceneName]
+    Name --> Check{Enabled scene available?}
+    Check -->|No| LoadProblem[Destination unavailable]
+    Check -->|Yes| Destination[Load destination]

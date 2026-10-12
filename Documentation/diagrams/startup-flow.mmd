@@ -1,0 +1,10 @@
+flowchart TD
+    Launch[Player launches build] --> Enabled[Unity uses first enabled build scene]
+    Enabled --> Menu[main menu scene]
+    Menu --> Awake[Components receive Awake / OnEnable]
+    Awake --> Start[Components receive Start]
+    Start --> Services[Save / scene / sound / audio components initialize]
+    Start --> Organizer[SceneOrgniser invokes serialized start event]
+    Services --> Ready[Menu interaction available]
+    Organizer --> Ready
+    Ready --> Selection[User starts and enters player selection]
